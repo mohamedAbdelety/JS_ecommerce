@@ -1,0 +1,50 @@
+[
+
+	{
+		"id":1,
+		"name":"iphone 12",
+		"category":"electronic",
+		"image":"iphone.jpg",
+		"price":9800,
+		"quantity":5,
+		"Descrption":"simple descrption about iphone 12"
+	},
+	{
+		"id":2,
+		"name":"coat",
+		"category":"fashion",
+		"image":"coat.jpg",
+		"price":400,
+		"quantity":34,
+		"Descrption":"handmade coat made from cotton"
+	},
+	{
+		"id":3,
+		"name":"NoteBook 7",
+		"category":"computing",
+		"image":"notebook.jpg",
+		"price":12000,
+		"quantity":3,
+		"Descrption":"simple descrption about notebook"
+	},
+	{
+		"id":4,
+		"name":"Dell G3",
+		"category":"computing",
+		"image":"dell.jpg",
+		"price":14000,
+		"quantity":6,
+		"Descrption":"simple descrption about dell"
+	},
+	{
+		"id":5,
+		"name":"treadmills",
+		"category":"sporting",
+		"image":"tread.jpg",
+		"price":5400,
+		"quantity":1,
+		"Descrption":"simple descrption about treadmills With a max user weight of 100kg and a speed range of 1-10 km/hr"
+	}
+
+
+]
