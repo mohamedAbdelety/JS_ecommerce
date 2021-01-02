@@ -1,3 +1,4 @@
+//Retrieving data from JSON File
 function ProductsStore() {
     if (ProductsStore.counter > 0)
         throw new Error("invalid creation of another ItemsStore instance");
@@ -6,9 +7,7 @@ function ProductsStore() {
 
     var data = [];
 
-    var that = this;
-
-    (function initializeItems() {
+    (function () {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "items.json");
         xhr.send("");
@@ -16,7 +15,7 @@ function ProductsStore() {
             if (xhr.readyState == 4) {
                 if (xhr.status >= 200 && xhr.status < 300) {
                     data = JSON.parse(xhr.responseText);
-                    viewedProducts.allProducts();
+                    dispatchEvent(JsonProductsImport);
                 } else
                     alert(xhr.statusText);
             }
@@ -34,9 +33,13 @@ function ProductsStore() {
         throw "Product id not found in the ProductStore";
     }
 }
-
 ProductsStore.counter = 0;
 
+var JsonProductsImport = new Event("onLoadProductsData");
+
+
+
+//Store's products Constructor
 function Product(_id, _name, _category, _image, _price, _quantity, _desc) {
     this.id = _id;
     this.name = _name;
@@ -46,29 +49,41 @@ function Product(_id, _name, _category, _image, _price, _quantity, _desc) {
     this.quantity = _quantity;
     this.desc = _desc;
 };
+/*=============================================================================*/
 
+
+
+
+
+//Cart Items Constructor ,cart object has only two attributes:
+// Product ID and the number of product items in the cart
 function CartItem(_Itemid, _quantity = 1) {
     this.Itemid = _Itemid;
     this.quantity = _quantity;
-
-    this.increaseQuantity = function (increase = 1) {
-        this.quantity += increase;
-    }
-
-    this.decreaseQuantity = function (decrease = 1) {
-        if (this.quantity > decrease) this.quantity -= decrease;
-    }
-
-    this.CartItemPrice = function () {
-        var that = this;
-        return store.getProductById(that.Itemid).price * this.quantity;
-    }
-
-
+}
+CartItem.prototype.increaseQuantity = function (increase = 1) {
+    this.quantity += increase;
+}
+CartItem.prototype.decreaseQuantity = function (decrease = 1) {
+    if (this.quantity > decrease) this.quantity -= decrease;
+}
+CartItem.prototype.CartItemPrice = function () {
+    var that = this;
+    return store.getProductById(that.Itemid).price * this.quantity;
 }
 
+/*=============================================================================*/
 
-//use this function in Cart page 
+
+/*The cart object has all the items in cartItems array(array of cartItem objects) , this array will be
+cloned in the cookies.cartCookie is updated on every change in the cartItems array
+function to be used to handle UI
+-addCartItem(): takes cartitem Object as input (thus it will be passed the cart item constructor)
+-removeCartItem(): take item's ID as parameter
+-removeAllCartItems():takes no parameters
+-decreaseCartItemQuantity(): takes the item id and the quantity to be decreased by  
+-increaseCartItemQuantity(): takes the item id and the quantity to be increased by 
+*/
 var Cart = {
     cartItems: [],
 
@@ -80,6 +95,11 @@ var Cart = {
     },
 
     addCartItem: function (_newCartItem) {
+        if (arguments.length != 1)
+            throw "function must take only One parameter";
+        if (_newCartItem.constructor != CartItem)
+            throw "parameter should be of type CartItem";
+
         for (var cartItem of this.cartItems)
             if (cartItem.Itemid == _newCartItem.Itemid) {
                 cartItem.increaseQuantity(_newCartItem.quantity);
@@ -140,10 +160,68 @@ var Cart = {
                 this.cartItems.push(new CartItem(cartItem.Itemid, cartItem.quantity));
         }
 
+    },
+    
+    cartTotalPrice: function () {
+        var sum = 0;
+        for (var item of this.cartItems) {
+            sum += item.CartItemPrice();
+        }
+        return sum;
+
+    }
+}
+/*==========================================================================*/
+
+
+
+
+/*Wish List*/
+/*
+-WishList.wishListItems: Array if all liked items IDs;
+-likeItem(_itemId): function to like item
+-unlikeItem(_itemId):function to unlike item
+*/
+
+var WishList = {
+    wishListItems: [],
+    addWishListItem: function (_itemId) {
+        if (!this.wishListItems.includes(_itemId)) {
+            this.wishListItems.push(_itemId);
+            this.updateWishListCookie();
+        }
+    },
+
+    removeWishListItem: function (_itemId) {
+        this.wishListItems.splice(this.wishListItems.indexOf(_itemId), 1);
+        this.updateWishListCookie();
+    },
+
+    removeAllWishListItems: function () {
+        this.wishListItems = [];
+        this.updateWishListCookie();
+    },
+
+    updateWishListCookie: function () {
+        var LikedStr = JSON.stringify(this.wishListItems);
+        var expireDate = new Date();
+        expireDate.setMonth(expireDate.getMonth() + 1);
+        $C.setCookie("WishList", LikedStr, expireDate);
+    },
+    importFromCookie: function () {
+        if ($C.hasCookie("WishList")) {
+            for (var likedItem of JSON.parse($C.getCookie("WishList")))
+                this.wishListItems.push(likedItem);
+        }
     }
 }
 
-//use this object to get data in the products page 
+
+/*
+-viewProduct object is used to view products in the store by calling
+-viewedProducts.allProducts(): return array of all objects in the store
+-viewedProducts.(minPrice, maxPrice, category, name): returns array of objects after applying the filter
+*/
 var viewedProducts = {
     data: [],
 
@@ -164,6 +242,33 @@ var viewedProducts = {
 }
 
 
-
+/*==================================================================================================*/
+//initializing data
 var store = new ProductsStore();
-Cart.importFromCookie();
+
+
+addEventListener("onLoadProductsData", function () {
+    viewedProducts.allProducts();
+    Cart.importFromCookie();
+    WishList.importFromCookie();
+});
+
+
+
+
+
+
+
+
+//  //Testing
+
+// Cart.removeAllCartItems();
+// Cart.addCartItem(new CartItem(1,3));
+// Cart.addCartItem(new CartItem(2,7));
+// Cart.addCartItem(new CartItem(1,3));
+
+
+// // WishList.removeAllWishListItems();
+// WishList.addWishListItem(2);
+// WishList.addWishListItem(3);
+// WishList.removeWishListItem(2);
