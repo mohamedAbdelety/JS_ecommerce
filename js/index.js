@@ -169,6 +169,13 @@ var Cart = {
         }
         return sum;
 
+    },
+
+    cartItemsCount :function() {
+        var result = 0;
+        for (var cartItem of this.cartItems)
+            result+= cartItem.quantity;
+        return result;
     }
 }
 /*==========================================================================*/
@@ -213,6 +220,9 @@ var WishList = {
             for (var likedItem of JSON.parse($C.getCookie("WishList")))
                 this.wishListItems.push(likedItem);
         }
+    },
+    wishListItemsCount :function() {
+        return this.wishListItems.length;
     }
 }
 
@@ -272,3 +282,6 @@ addEventListener("onLoadProductsData", function () {
 // WishList.addWishListItem(2);
 // WishList.addWishListItem(3);
 // WishList.removeWishListItem(2);
+
+
+//
