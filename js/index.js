@@ -13,7 +13,7 @@ function ProductsStore() {
         xhr.send(null);
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                that.data = JSON.parse(xhr.responseText);
+                data = JSON.parse(xhr.responseText);
             }
         }
     })();
@@ -29,7 +29,9 @@ function ProductsStore() {
         throw "Product id not found in the ProductStore";
     }
 }
-ItemsStore.counter = 0;
+ProductsStore.counter = 0;
+
+
 var Item = function (_id, _name, _category, _image, _price, _quantity, _desc) {
     this.id = _id;
     this.name = _name;
