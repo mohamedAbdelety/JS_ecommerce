@@ -6,14 +6,10 @@ function ItemsStore() {
     (function initializeItems() {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "items.json");
-        xhr.send("");
+        xhr.send(null);
         xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4) {
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    that.data = JSON.parse(xhr.responseText);
-                    console.log(that);
-                } else 
-                    alert(xhr.statusText);
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                that.data = JSON.parse(xhr.responseText);
             }
         }
     })();
@@ -22,7 +18,6 @@ function ItemsStore() {
     }
     ItemsStore.counter++;
 }
-
 ItemsStore.counter = 0;
 var Item = function (_id, _name, _category, _image, _price, _quantity, _desc) {
     this.id = _id;
