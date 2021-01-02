@@ -13,7 +13,7 @@ function ProductsStore() {
         xhr.send(null);
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                that.data = JSON.parse(xhr.responseText);
+                data = JSON.parse(xhr.responseText);
             }
         }
     })();
