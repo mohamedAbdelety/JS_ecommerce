@@ -4,7 +4,7 @@
 		"id":1,
 		"name":"iphone 12",
 		"category":"electronic",
-		"image":"iphone.jpg",
+		"image":"iphone.png",
 		"price":9800,
 		"quantity":5,
 		"Descrption":"simple descrption about iphone 12"
@@ -38,7 +38,7 @@
 	},
 	{
 		"id":5,
-		"name":"treadmills",
+		"name":"treadmill",
 		"category":"sporting",
 		"image":"tread.jpg",
 		"price":5400,
