@@ -32,55 +32,68 @@
                 <img src="image/logo.png">
             </a>
             <ul>
-                <li class="home-link active"><a href="#home">Home</a></li>
-                <li><a class="about-link" href="#about">About Us</a></li>
-                <li><a class="product-link" href="#some_product">Some Products</a class="about-link"></li>
-                <li><a class="leaderShip-link" href="#LeaderShip">LeaderShip</a class="about-link"></li>
-                <li><a class="contact-link" href="#contact">Contact</a class="about-link"></li>
+                <li class="home-link active"><a href="index.html#home">Home</a></li>
+                <li><a class="about-link" href="index.html#about">About Us</a></li>
+                <li><a class="product-link" href="index.html#some_product">Some Products</a class="about-link"></li>
+                <li><a class="leaderShip-link" href="index.html#LeaderShip">LeaderShip</a class="about-link"></li>
+                <li><a class="contact-link" href="index.html#contact">Contact</a class="about-link"></li>
             </ul>
             <div>
                 <span>
                     <i class="fa fa-heart-o"></i>
                     <span class="label" style="right: 200px;">01</span>
                 </span>
-                <span>
+                <a href="card.html">
                     <i class="fa fa-shopping-cart"></i>
                     <span class="label" style="right: 120px;">04</span>
-                </span>
+                </a>
             </div>
         </div>
-        <section class="banner">
-            <div class="overlay">
-                <div class="container">
-                    <h1>
-                        <span>W</span>inter <span>C</span>ollection
-                    </h1>
-                    <p>Shop with us and enjoy by our discounts.
-                        electronic , computing , sporting and many other section. Please spread a website to your friends.
-                    </p>
-                    <button class="btn">Shop Now</button>
-                </div>
+        <section class="banner2">
+            <div class="overlay-card-panner">
             </div>
         </section>  
-        
-        <section id="about">
-            <h2><span>A</span>bout <span>U</span>s</h2>
-            <p class="aboutpragraph">
-               M3B company aims to acheive fast succeful through satisfied group of clients . have small group of categeroies but is very important for your family. enjoy with our categories
-            </p>       
-            <div class="main-cat">
-                <div class="text-effect">
-                    <img src="image/pexels-andrea-piacquadio-914927.jpg">
-                </div>
-                <div class="text-effect">
-                    <img src="image/computing.jpg">
-                </div>
-                <div class="text-effect">
-                    <img src="image/sporting.jpg">
-                </div>
+       
+
+        <section class="card-list">
+            <div class="container">
+                <table class="card-table">
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Description</th>
+                        <th>image</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                        <th>Control</th>
+                    </tr>
+                    <tr>
+                        <td>Alfreds Futterkiste</td>
+                        <td>Maria Anders</td>
+                        <td>Germany</td>
+                        <td>
+                            <button class="mybtn btn-red">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <input type="number" id="quant-field" disabled>
+                            <button class="mybtn btn-green">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </td>
+                        <td>Christina Berglund</td>
+                        <td>Sweden</td>
+                        <td>
+                            <button class="mybtn btn-delete">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+                <button class="upd mybtn btn-update">
+                    <i class="fa fa-edit"></i><span> Save Change</span>
+                </button>
             </div>
         </section>
-
        
 
 
