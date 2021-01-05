@@ -14,6 +14,7 @@ function ProductsStore() {
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 data = JSON.parse(xhr.responseText);
+                dispatchEvent(loadingproducts);
             }
         }
     })();
@@ -243,6 +244,8 @@ var viewedProducts = {
 
 }
 
+
+var loadingproducts = new Event("onLoadProductsData");
 
 /*==================================================================================================*/
 //initializing data
