@@ -32,15 +32,15 @@ function ProductsStore() {
 }
 ProductsStore.counter = 0;
 
-var Item = function (_id, _name, _category, _image, _price, _quantity, _desc) {
-    this.id = _id;
-    this.name = _name;
-    this.category = _category;
-    this.image = _image;
-    this.price = _price;
-    this.quantity = _quantity;
-    this.desc = _desc;
-};
+// var Item = function (_id, _name, _category, _image, _price, _quantity, _desc) {
+//     this.id = _id;
+//     this.name = _name;
+//     this.category = _category;
+//     this.image = _image;
+//     this.price = _price;
+//     this.quantity = _quantity;
+//     this.desc = _desc;
+// };
 /*=============================================================================*/
 
 
@@ -150,7 +150,7 @@ var Cart = {
         }
 
     },
-    
+
     cartTotalPrice: function () {
         var sum = 0;
         for (var item of this.cartItems) {
@@ -160,10 +160,10 @@ var Cart = {
 
     },
 
-    cartItemsCount :function() {
+    cartItemsCount: function () {
         var result = 0;
         for (var cartItem of this.cartItems)
-            result+= cartItem.quantity;
+            result += cartItem.quantity;
         return result;
     }
 }
@@ -206,7 +206,7 @@ var WishList = {
                 this.wishListItems.push(likedItem);
         }
     },
-    wishListItemsCount :function() {
+    wishListItemsCount: function () {
         return this.wishListItems.length;
     }
 }
@@ -224,95 +224,59 @@ var viewedProducts = {
         this.data = store.getItems();
     },
 
-    filter: function (minPrice, maxPrice, category, name) {
+    filter: function (minPrice, maxPrice, categories, name) {
         this.allProducts();
         this.data = this.data.filter(function (product) {
-            return (product.price > minPrice || !minPrice) &&
-                (product.price < maxPrice || !maxPrice) &&
-                (product.category == category || !category) &&
+            return (product.price >= minPrice || !minPrice) &&
+                (product.price <= maxPrice || !maxPrice) &&
+                (categories.includes(product.category) || !categories) &&
                 (product.name.indexOf(name) != -1 || !name)
         })
+    },
+
+    getMaxPrice: function () {
+        var maxPrice = 0;
+        for (var product of this.data)
+            if (product.price > maxPrice)
+                maxPrice = product.price;
+        return maxPrice;
+    },
+
+    getMinPrice: function () {
+        if (this.data.length == 0)
+            return 0;
+        var minPrice = this.data[0].price;
+        for (var product of this.data)
+            if (product.price < minPrice)
+                minPrice = product.price;
+        return minPrice;
+    },
+
+    getCategories: function () {
+        var categories = [];
+        for (var product of this.data)
+            if (!categories.includes(product.category))
+                categories.push(product.category);
+        return categories;
     }
 
 }
 
 
 /*==================================================================================================*/
-var e = new Event ("onLoadProductsData");
+
 
 //initializing data
-var store= new ProductsStore(); 
-var _items;
+var store = new ProductsStore();
+
+
+var e = new Event("onLoadProductsData");
 
 addEventListener("onLoadProductsData", function () {
-    _items = store.getItems();
     Cart.importFromCookie();
     WishList.importFromCookie();
-    displayProducts();
-    displayProducts();
-    viewedProducts.allProducts();
-    
 });
 //-----------------------------------------------------------------
-
-var _card;
-function createCard(cardDesc, imgSrc, price, id){
-    var blueClass = "";
-    var redClass = "";
-    for (var i in Cart.cartItems){
-        console.log(i);
-        if (Cart.cartItems[i].Itemid == id){
-            blueClass = "blue";
-        }  
-    }
-    for (var j in WishList.wishListItems){
-        if (WishList.wishListItems[j] == id){
-            redClass = "red";
-        }  
-    }
-    return document.createElement("div").innerHTML = 
-    "<div class='card'><img src="+imgSrc+"> <div class='container'> \
-    <hr> <p class='description'>"+cardDesc+"</p><span>"+price+"</span>\
-    <button class='currencyBtn'>Change currency</button>\
-            <br><br>\
-            <i onclick='heartHandler(this," +id+")' class='"+redClass+"wishlist fas fa-heart'></i>\
-            <i onclick='cartHandler(this," +id+")' class='"+blueClass+"cart fas fa-shopping-cart'></i>\
-            <br>\
-            </div> </div> </div>\
-    "  
-    
-}
-
-function heartHandler(icon, itemId){
-    icon.classList.toggle("red"); 
-    if (icon.classList[3] == "red"){
-        WishList.addWishListItem(itemId);
-    }else {
-        WishList.removeWishListItem(itemId);
-    }
-}
-function cartHandler(icon, itemId){
-    icon.classList.add("blue");
-    Cart.addCartItem(new CartItem(itemId));
-    
-}
-
-
-
-//----------------------------------------------------------------------
-
-function displayProducts(){
-    for (i in _items){
-        document.getElementById("cardContainer").insertAdjacentHTML(
-            "beforeend",createCard(_items[i].Descrption,_items[i].image, _items[i].price, _items[i].id));
-    } 
-}
-
-
-
-
-
-
 
 
 
