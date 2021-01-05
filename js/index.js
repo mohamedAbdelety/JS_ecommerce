@@ -14,7 +14,7 @@ function ProductsStore() {
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 data = JSON.parse(xhr.responseText);
-                dispatchEvent(loadingproducts);
+                dispatchEvent(e);
             }
         }
     })();
@@ -32,7 +32,6 @@ function ProductsStore() {
 }
 ProductsStore.counter = 0;
 
-
 var Item = function (_id, _name, _category, _image, _price, _quantity, _desc) {
     this.id = _id;
     this.name = _name;
@@ -43,9 +42,6 @@ var Item = function (_id, _name, _category, _image, _price, _quantity, _desc) {
     this.desc = _desc;
 };
 /*=============================================================================*/
-
-
-
 
 
 //Cart Items Constructor ,cart object has only two attributes:
@@ -172,10 +168,6 @@ var Cart = {
     }
 }
 /*==========================================================================*/
-
-
-
-
 /*Wish List*/
 /*
 -WishList.wishListItems: Array if all liked items IDs;
@@ -245,18 +237,79 @@ var viewedProducts = {
 }
 
 
-var loadingproducts = new Event("onLoadProductsData");
-
 /*==================================================================================================*/
-//initializing data
-var store = new ProductsStore();
+var e = new Event ("onLoadProductsData");
 
+//initializing data
+var store= new ProductsStore(); 
+var _items;
 
 addEventListener("onLoadProductsData", function () {
-    viewedProducts.allProducts();
+    _items = store.getItems();
     Cart.importFromCookie();
     WishList.importFromCookie();
+    displayProducts();
+    displayProducts();
+    viewedProducts.allProducts();
+    
 });
+//-----------------------------------------------------------------
+
+var _card;
+function createCard(cardDesc, imgSrc, price, id){
+    var blueClass = "";
+    var redClass = "";
+    for (var i in Cart.cartItems){
+        console.log(i);
+        if (Cart.cartItems[i].Itemid == id){
+            blueClass = "blue";
+        }  
+    }
+    for (var j in WishList.wishListItems){
+        if (WishList.wishListItems[j] == id){
+            redClass = "red";
+        }  
+    }
+    return document.createElement("div").innerHTML = 
+    "<div class='card'><img src="+imgSrc+"> <div class='container'> \
+    <hr> <p class='description'>"+cardDesc+"</p><span>"+price+"</span>\
+    <button class='currencyBtn'>Change currency</button>\
+            <br><br>\
+            <i onclick='heartHandler(this," +id+")' class='"+redClass+"wishlist fas fa-heart'></i>\
+            <i onclick='cartHandler(this," +id+")' class='"+blueClass+"cart fas fa-shopping-cart'></i>\
+            <br>\
+            </div> </div> </div>\
+    "  
+    
+}
+
+function heartHandler(icon, itemId){
+    icon.classList.toggle("red"); 
+    if (icon.classList[3] == "red"){
+        WishList.addWishListItem(itemId);
+    }else {
+        WishList.removeWishListItem(itemId);
+    }
+}
+function cartHandler(icon, itemId){
+    icon.classList.add("blue");
+    Cart.addCartItem(new CartItem(itemId));
+    
+}
+
+
+
+//----------------------------------------------------------------------
+
+function displayProducts(){
+    for (i in _items){
+        document.getElementById("cardContainer").insertAdjacentHTML(
+            "beforeend",createCard(_items[i].Descrption,_items[i].image, _items[i].price, _items[i].id));
+    } 
+}
+
+
+
 
 
 

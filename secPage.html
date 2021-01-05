@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page2</title>
+    <link rel="stylesheet" href="css/secPage.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" 
+    crossorigin="anonymous">
+
+    
+</head>
+<body>
+    
+        <div class="topnav" id="myTopnav">
+        <div id="container">
+            <a href="#firstPage" class="active">Home</a>
+            <a onclick="AllCatHandler()" href="#">All Categories</a>
+            <a onclick="FashionHandler()" href="#">Fashion</a>
+            <a onclick="ElectroHandler()" href="#">Electronics</a>
+            <a onclick="KitchenHandler()" href="#">Home&Kitchen</a>
+            <a onclick="HealthHandler()" href="#">Health&Beauty</a>
+            <a onclick="MobileHandler()" href="#">Mobiles&Laptops</a>
+        </div>
+        </div>
+
+        <div class="filter">
+            <label class="margin">Filter by name:</label><br>
+            <input class="margin" placeholder="Enter product name"><br>
+            <label class="margin">Filter by price:</label><br>
+            <label>TO:</label>
+            <select class="margin">
+                <option>100</option>
+                <option>1000</option>
+                <option>5000</option>
+            </select>
+            <label>From:</label>
+            <select class="margin">
+                <option>1000</option>
+                <option>5000</option>
+                <option>10000</option>
+            </select>
+    
+        </div>
+        
+
+        <div id="cardContainer">
+        </div>
+        <script src="js/cookies.js"></script>
+        <script src="js/index.js"></script>
+</body>
+</html>
