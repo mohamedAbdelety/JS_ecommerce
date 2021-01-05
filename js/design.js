@@ -19,12 +19,17 @@ $(".second-nav ul li a").click(function(){
 });
 $(".about-link").click(function(){
     $("html,body").animate({
-        scrollTop: $('#about').offset().top
+        scrollTop: $('#about').offset().top - 100
     },1000); 
  });
  $(".product-link").click(function(){
     $("html,body").animate({
-        scrollTop: $('#some_product').offset().top
+        scrollTop: $('#some_product').offset().top - 80
+    },1000); 
+ });
+ $(".leaderShip-link").click(function(){
+    $("html,body").animate({
+        scrollTop: $('#leadership').offset().top - 120
     },1000); 
  });
  $(".contact-link").click(function(){
