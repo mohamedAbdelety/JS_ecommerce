@@ -20,7 +20,7 @@ function intiTable(){
             CartRow = `
                 <tr>
                     <td>${product.name}</td>
-                    <td title="${product.Descrption}">${product.Descrption.substr(0,45)}</td>
+                    <td title="${product.description}">${product.description.substr(0,45)}</td>
                     <td>
                         <a href="image/items/${product.image}">
                             <img src="image/items/${product.image}" width="100px">
