@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    font-family: opensans,"Helvetica Neue",Helvetica,Helvetica,Arial,sans-serif;
 }
 #container, #container2{
     margin-left: 3%;
@@ -103,26 +104,32 @@ color: white;
     margin-left: 79%;
     margin-right: 1%;
 }
-.margin{
-    margin-top: 10%;
-    margin-bottom: 10%;
+
+.filter>div {
+    margin-top: 10px;
+    margin-bottom: 20px;
+
 }
-/*-----------Heart Style-------------*/
-.red{
-    color: red;
-    transition: 0.3s;
+
+.filter>div>label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
 }
-/*-----------Add to cart Style-------------*/
-.blue{
-    color: rgb(42, 139, 177);
-    transition: 0.3s;
+
+#productNameFilterTxt{
+    display: block;
+    width: auto;
+    font-size: 16px;
+    padding: 5px 10px;
 }
 
 #priceFilter input {
     display: block;
-    width: 100%;
-    max-width: 80px;
-    font-size: 18px;
+    width: 70px;
+    font-size: 16px;
+    padding: 5px 0 5px 10px;
+    text-align: center;
 }
 
 #priceFilterMin , #priceFilterMax {
@@ -137,6 +144,18 @@ color: white;
 #priceFilterSlider {
     margin: 10px 15px;
 }
+/*-----------Heart Style-------------*/
+.red{
+    color: red;
+    transition: 0.3s;
+}
+/*-----------Add to cart Style-------------*/
+.blue{
+    color: rgb(42, 139, 177);
+    transition: 0.3s;
+}
+
+
 
 
 

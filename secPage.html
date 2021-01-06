@@ -29,31 +29,39 @@
     </div>
 
     <div class="filter">
-        <label class="margin">Filter by name:</label><br>
-        <input class="margin" placeholder="Enter product name"><br>
-        <label class="margin">Filter by price:</label><br>
+
+        <!-- name filter -->
+
+        <div id="nameFilter">
+            <label>Filter by name:</label>
+            <input id="productNameFilterTxt" placeholder="Search by product name">
+        </div>
+        <hr>
 
         <!-- price filter -->
         <div id="priceFilter">
+            <label>Filter by price:</label>
 
             <div id="priceFilterMin">
-                <label for="priceFilterMin">From:</label>
+                <label for="priceFilterMinVal">From:</label>
                 <input type="number" min="0" id="priceFilterMinVal">
             </div>
 
             <div id="priceFilterMax">
-                <label for="priceFilterMax">To :</label>
+                <label for="priceFilterMaxVal">To :</label>
                 <input type="number" min="0" id="priceFilterMaxVal">
             </div>
 
             <div id="priceFilterSlider"></div>
         </div>
+        <hr>
 
+        <!-- category filter -->
         <div id="categoryFilter">
-
-
+            <label>Filter by Category:</label>  
         </div>
 
+        
         <input type="button" id="applyFilterBtn" value="Apply" />
 
     </div>
