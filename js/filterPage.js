@@ -23,7 +23,7 @@ function createCard(product) {
                 <hr> 
                 <p class='description'>` + product.description + `</p>
                 <span>` + product.price + `</span>
-                <button class='currencyBtn'>Change currency</button>
+                <button onclick='changeCurrency(this,`+product.price+`)' class='currencyBtn'>Change currency</button>
                 <br>
                 <br>
                 <i onclick='heartHandler(this,` + product.id + `)' class='` + redClass + ` wishlist fas fa-heart'></i>
