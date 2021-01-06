@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page2</title>
+    <link rel="stylesheet" href="css/secPage.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+
+
+</head>
+
+<body>
+
+    <div class="topnav" id="myTopnav">
+        <div id="container">
+            <a href="#firstPage" class="active">Home</a>
+            <a onclick="AllCatHandler()" href="#">All Categories</a>
+            <a onclick="FashionHandler()" href="#">Fashion</a>
+            <a onclick="ElectroHandler()" href="#">Electronics</a>
+            <a onclick="KitchenHandler()" href="#">Home&Kitchen</a>
+            <a onclick="HealthHandler()" href="#">Health&Beauty</a>
+            <a onclick="MobileHandler()" href="#">Mobiles&Laptops</a>
+        </div>
+    </div>
+
+    <div class="filter">
+
+        <!-- name filter -->
+
+        <div id="nameFilter">
+            <label>Filter by name:</label>
+            <input id="productNameFilterTxt" placeholder="Search by product name">
+        </div>
+        <hr>
+
+        <!-- price filter -->
+        <div id="priceFilter">
+            <label>Filter by price:</label>
+
+            <div id="priceFilterMin">
+                <label for="priceFilterMinVal">From:</label>
+                <input type="number" min="0" id="priceFilterMinVal">
+            </div>
+
+            <div id="priceFilterMax">
+                <label for="priceFilterMaxVal">To :</label>
+                <input type="number" min="0" id="priceFilterMaxVal">
+            </div>
+
+            <div id="priceFilterSlider"></div>
+        </div>
+        <hr>
+
+        <!-- category filter -->
+        <div id="categoryFilter">
+            <label>Filter by Category:</label>  
+        </div>
+
+        
+        <input type="button" id="applyFilterBtn" value="Apply" />
+
+    </div>
+
+
+    <div id="cardContainer"></div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="js/changeCurrency.js"></script>
+    <script src="js/cookies.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/filterPage.js"></script>
+
+</body>
+
+</html>
