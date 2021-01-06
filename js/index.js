@@ -14,6 +14,7 @@ function ProductsStore() {
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 data = JSON.parse(xhr.responseText);
+                dispatchEvent(e);
             }
         }
     })();
@@ -29,7 +30,10 @@ function ProductsStore() {
         throw "Product id not found in the ProductStore";
     }
 }
-ItemsStore.counter = 0;
+
+
+
+ProductsStore.counter = 0;
 var Item = function (_id, _name, _category, _image, _price, _quantity, _desc) {
     this.id = _id;
     this.name = _name;
@@ -101,6 +105,19 @@ var Cart = {
         this.updateCartCookie();
     },
 
+
+    // new array to update old cartitems
+    saveCartUpdate: function(_newCartItems){
+        this.cartItems = [];
+        for (var cartItem of _newCartItems){
+            this.cartItems.push(cartItem);
+        }
+        this.updateCartCookie();
+    },
+
+
+
+
     removeAllCartItems: function () {
         this.cartItems = [];
         this.updateCartCookie();
@@ -141,9 +158,9 @@ var Cart = {
             var expireDate = new Date();
             expireDate.setMonth(expireDate.getMonth() + 1);
             $C.setCookie("cart", cookieStr, expireDate);
-        }
+    },
 
-        ,
+
     importFromCookie: function () {
         if ($C.hasCookie("cart")) {
             for (var cartItem of JSON.parse($C.getCookie("cart")))
@@ -169,6 +186,30 @@ var Cart = {
     }
 }
 /*==========================================================================*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -245,8 +286,9 @@ var viewedProducts = {
 /*==================================================================================================*/
 //initializing data
 var store = new ProductsStore();
+//Cart.importFromCookie();
 
-
+var e = new Event("onLoadProductsData");
 addEventListener("onLoadProductsData", function () {
     viewedProducts.allProducts();
     Cart.importFromCookie();
@@ -254,24 +296,3 @@ addEventListener("onLoadProductsData", function () {
 });
 
 
-
-
-
-
-
-
-//  //Testing
-
-// Cart.removeAllCartItems();
-// Cart.addCartItem(new CartItem(1,3));
-// Cart.addCartItem(new CartItem(2,7));
-// Cart.addCartItem(new CartItem(1,3));
-
-
-// // WishList.removeAllWishListItems();
-// WishList.addWishListItem(2);
-// WishList.addWishListItem(3);
-// WishList.removeWishListItem(2);
-
-
-//

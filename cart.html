@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title> M3B | Cart </title>
+        <meta name="description" content="">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/font-awesome.min.css">
         <link rel="stylesheet" href="css/style.css">
     </head>
 
     <body>
 
-        
-        
         <section class="navbar">
             <ul>
                 <li><i class="fa fa-facebook"></i></li>
@@ -28,7 +30,7 @@
             </div>
         </section>
         <div class="second-nav">
-            <a class="logo" href="#">
+            <a class="logo" href="index.html">
                 <img src="image/logo.png">
             </a>
             <ul>
@@ -39,65 +41,53 @@
                 <li><a class="contact-link" href="index.html#contact">Contact</a class="about-link"></li>
             </ul>
             <div>
-                <span>
+                <a href="wish.html">
                     <i class="fa fa-heart-o"></i>
                     <span class="label" style="right: 200px;">01</span>
-                </span>
-                <a href="card.html">
+                </a>
+                <a href="cart.html">
                     <i class="fa fa-shopping-cart"></i>
-                    <span class="label" style="right: 120px;">04</span>
+                    <span id="cartCountSpan" class="label" style="right: 120px;">00</span>
                 </a>
             </div>
         </div>
         <section class="banner2">
-            <div class="overlay-card-panner">
+            <div class="overlay-cart-panner">
             </div>
         </section>  
        
 
-        <section class="card-list">
+        <section class="cart-list">
             <div class="container">
-                <table class="card-table">
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Description</th>
-                        <th>image</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Total</th>
-                        <th>Control</th>
-                    </tr>
-                    <tr>
-                        <td>Alfreds Futterkiste</td>
-                        <td>Maria Anders</td>
-                        <td>Germany</td>
-                        <td>
-                            <button class="mybtn btn-red">
-                                <i class="fa fa-minus"></i>
-                            </button>
-                            <input type="number" id="quant-field" disabled>
-                            <button class="mybtn btn-green">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </td>
-                        <td>Christina Berglund</td>
-                        <td>Sweden</td>
-                        <td>
-                            <button class="mybtn btn-delete">
-                                <i class="fa fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
+                <table id="cartTable" class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Description</th>
+                            <th>image</th>
+                            <th>Quantity</th>
+                            <th>Available</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                            <th>Control</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cartTableBody">
+
+                    </tbody>
                 </table>
-                <button class="upd mybtn btn-update">
+                <button id="saveCart" class="upd mybtn btn-update">
                     <i class="fa fa-edit"></i><span> Save Change</span>
+                </button>
+                <button id="emptycart" class="mybtn btn-delete">
+                    <i class="fa fa-trash"></i><span> Delete Cart items</span>
+                </button>
+                <button id="printcart" class="mybtn btn-printing">
+                    <i class="fa fa-print"></i><span> print Cart</span>
                 </button>
             </div>
         </section>
        
-
-
-
         <section class="footer">
             <div class="container">
                 <div>
@@ -123,12 +113,12 @@
                     <ul>
                         
                         <li>
-                            <a href="#">
+                            <a href="wish.html">
                             Wishes List
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="cart.html">
                                 Shopping Cart
                             </a>
                         </li>
@@ -181,8 +171,9 @@
 
         <script src="js/jquery-3.1.1.min.js"></script>
         <script src="js/design.js"></script>
+        <script src="js/cookies.js"></script>
         <script src="js/index.js"></script>
-
+        <script src="js/CartInteraction.js"></script>
     </body>
 
 </html>

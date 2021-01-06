@@ -601,7 +601,7 @@ h2 span,h1 span,h3 span{
 }
 /*
 ///////////////////////////////
-//       Card Page           //
+//       Cart Page           //
 ///////////////////////////////
 */
 
@@ -614,13 +614,13 @@ h2 span,h1 span,h3 span{
     background-size: cover;
 }
 
-.overlay-card-panner{
+.overlay-cart-panner{
     background-color: rgba(0,0,0,0.4);
     height: 350px;
     color: #fff;
 }
 
-.card-list{
+.cart-list{
     margin-top: 80px;
     margin-bottom: 50px;
 }
@@ -628,20 +628,20 @@ h2 span,h1 span,h3 span{
 
 
 
-.card-table {
+.cart-table {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
   
-.card-table td, .card-table th {
+.cart-table td, .cart-table th {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
 }
-.card-table tr:nth-child(even){background-color: #f2f2f2;}
-.card-table tr:hover {background-color: #ddd;}
-.card-table th {
+.cart-table tr:nth-child(even){background-color: #f2f2f2;}
+.cart-table tr:hover {background-color: #ddd;}
+.cart-table th {
 padding-top: 12px;
 padding-bottom: 12px;
 background-color: #999;
@@ -668,6 +668,10 @@ color: white;
     background-color: #d9534f;
     padding: 6px 20px;
 }
+.btn-printing{
+    background-color: #f0ad4e;
+    padding: 6px 20px;
+}
 .btn-update{
     background-color: #5bc0de;
     padding: 6px 20px;
@@ -686,6 +690,8 @@ color: white;
     padding: 4px 20px;
 }
 
-#quant-field{
+.quant-field{
     height: 22px;
+    text-align: center;
 }
+
