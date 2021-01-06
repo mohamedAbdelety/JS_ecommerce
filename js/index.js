@@ -224,14 +224,33 @@ var viewedProducts = {
         this.data = store.getItems();
     },
 
-    filter: function (minPrice, maxPrice, categories, name) {
+    filterData: function (minPrice, maxPrice, categories, name) {
         this.allProducts();
         this.data = this.data.filter(function (product) {
             return (product.price >= minPrice || !minPrice) &&
                 (product.price <= maxPrice || !maxPrice) &&
-                (categories.includes(product.category) || !categories) &&
+                (categories.includes(product.category) || !categories || categories.length == 0) &&
                 (product.name.indexOf(name) != -1 || !name)
         })
+    },
+    // filterDataByPrice: function () {
+    //     this.data = this.data.filter(function (product) {
+    //         return (product.price >= minPrice || !minPrice) &&
+    //             (product.price <= maxPrice || !maxPrice);
+    //     });
+    // },
+
+    // filterDataByCategory: function () {
+    //     this.data = this.data.filter(function (product) {
+    //         return  (categories.includes(product.category) || !categories) ;
+    //     });
+    // },
+    getProductsCountForCategory: function (category) {
+        var count = 0;
+        for (var product of this.data)
+            if (product.category == category)
+                count++;
+        return count;
     },
 
     getMaxPrice: function () {
@@ -252,9 +271,9 @@ var viewedProducts = {
         return minPrice;
     },
 
-    getCategories: function () {
+    getAllCategories: function () {
         var categories = [];
-        for (var product of this.data)
+        for (var product of store.getItems())
             if (!categories.includes(product.category))
                 categories.push(product.category);
         return categories;

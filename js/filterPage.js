@@ -72,40 +72,48 @@ function setPriceFilter(minPrice, maxPrice) {
         max: maxPrice,
         values: [minPrice, maxPrice],
         slide: function (event, ui) {
-            $("#priceFilterMinVal").val("$" + ui.values[0]);
-            $("#priceFilterMaxVal").val("$" + ui.values[1]);
+            $("#priceFilterMinVal").val(ui.values[0]);
+            $("#priceFilterMaxVal").val(ui.values[1]);
         },
 
     });
 
-    $("#priceFilterMinVal").val("$" + $("#priceFilterSlider").slider("values", 0));
-    $("#priceFilterMaxVal").val("$" + $("#priceFilterSlider").slider("values", 1));
+    $("#priceFilterMinVal").val($("#priceFilterSlider").slider("values", 0));
+    $("#priceFilterMaxVal").val($("#priceFilterSlider").slider("values", 1));
 }
 
 function setCategoryFilter() {
     document.getElementById("categoryFilter").innerHTML = "";
 
-    for (var category of viewedProducts.getCategories()) {
+    for (var category of viewedProducts.getAllCategories()) {
         var categoryNode = document.createElement("div");
         categoryNode.innerHTML = `<label for=` + category + `>` + category + `</label>
-                                  <input type="checkbox" id="` + category + `" />`;
+                                  <input type="checkbox" id="` + category + 
+                                  (viewedProducts.getProductsCountForCategory(category)? `" checked />` : `" disabled />`) +
+                                  `<span>(` + viewedProducts.getProductsCountForCategory(category) + `)</span>`;
         document.getElementById("categoryFilter").appendChild(categoryNode);
     }
 }
 
 document.getElementById("applyFilterBtn").onclick = function () {
 
-    var checkedCategories = [];
+    viewedProducts.allProducts();
 
+    ///get checked categories for category filter
+    var checkedCategories = [];
     for (var categoryDiv of document.getElementById("categoryFilter").children) 
-        if(categoryDiv.lastChild.checked)
+        if(categoryDiv.children[1].checked)
             checkedCategories.push(categoryDiv.firstChild.innerHTML);
-    
-    viewedProducts.filter(
-        $("#priceFilterSlider").slider("values", 0),
-        $("#priceFilterSlider").slider("values", 1),
+
+    //filtering data
+    viewedProducts.filterData(
+        parseInt(document.querySelector("#priceFilterMinVal").value),
+        parseInt(document.querySelector("#priceFilterMaxVal").value),
         checkedCategories
     );
+    
     displayProducts();
+    setPriceFilter(viewedProducts.getMinPrice(), viewedProducts.getMaxPrice());
+    setCategoryFilter();
 
 }
