@@ -26,8 +26,8 @@ function createCard(product) {
                 <button class='currencyBtn'>Change currency</button>
                 <br>
                 <br>
-                <i onclick='heartHandler(this," + id + ")' class='` + redClass + `" wishlist fas fa-heart'></i>
-                <i onclick='cartHandler(this," + id + ")' class='` + blueClass + `" cart fas fa-shopping-cart'></i>
+                <i onclick='heartHandler(this,` + product.id + `)' class='` + redClass + ` wishlist fas fa-heart'></i>
+                <i onclick='cartHandler(this,` +  product.id + `)' class='` + blueClass + ` cart fas fa-shopping-cart'></i>
                 <br>
             </div> 
         </div>`;
