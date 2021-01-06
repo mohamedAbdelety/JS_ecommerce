@@ -80,6 +80,7 @@ function setPriceFilter(currMin, currMax) {
     $("#priceFilterMaxVal").val($("#priceFilterSlider").slider("values", 1));
 }
 
+
 function setCategoryFilter() {
    //document.getElementById("categoryFilter").innerHTML = "";
 
