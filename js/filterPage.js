@@ -2,7 +2,6 @@ function createCard(product) {
     var blueClass = "";
     var redClass = "";
     for (var i in Cart.cartItems) {
-        console.log(i);
         if (Cart.cartItems[i].Itemid == product.id) {
             blueClass = "blue";
         }
@@ -28,7 +27,7 @@ function createCard(product) {
                 <br>
             </div> 
         </div>`;
-    
+
 
 }
 
@@ -87,33 +86,68 @@ function setCategoryFilter() {
 
     for (var category of viewedProducts.getAllCategories()) {
         var categoryNode = document.createElement("div");
-        categoryNode.innerHTML = `<label for=` + category + `>` + category + `</label>
-                                  <input type="checkbox" id="` + category + 
-                                  (viewedProducts.getProductsCountForCategory(category)? `" checked />` : `" disabled />`) +
-                                  `<span>(` + viewedProducts.getProductsCountForCategory(category) + `)</span>`;
+        categoryNode.innerHTML = `<label for="` + category + `">` + category + `</label>
+                                  <input type="checkbox" id="` + category + `" checked />
+                                  <span name="` + category + `">(` + viewedProducts.getProductsCountForCategory(category) + `)</span>`;
         document.getElementById("categoryFilter").appendChild(categoryNode);
     }
+}
+
+function refreshCategoryFilter() {
+    ///refresh category checkBox
+    for (var categoryCheckbox of document.querySelectorAll("#categoryFilter input[type='checkbox']"))
+        if (viewedProducts.getProductsCountForCategory(categoryCheckbox.getAttribute("id")) == 0) {
+            // categoryCheckbox.checked = false;
+            categoryCheckbox.disabled = true;
+        } else
+            categoryCheckbox.disabled = false;
+
+    ///refresh category products count
+    for (var categoryProductsCountSpan of document.querySelectorAll("#categoryFilter span"))
+        categoryProductsCountSpan.innerHTML = "(" +
+        viewedProducts.getProductsCountForCategory(categoryProductsCountSpan.getAttribute("name")) +
+        ")";
+
+
+}
+
+function refreshPriceFilter() {
+
 }
 
 document.getElementById("applyFilterBtn").onclick = function () {
 
     viewedProducts.allProducts();
 
+    //filtering data
+    // viewedProducts.filterData(
+    //     parseInt(document.querySelector("#priceFilterMinVal").value),
+    //     parseInt(document.querySelector("#priceFilterMaxVal").value),
+    //     checkedCategories
+    // );
+
+    viewedProducts.filterDataByPrice(
+        parseInt(document.querySelector("#priceFilterMinVal").value),
+        parseInt(document.querySelector("#priceFilterMaxVal").value)
+    );
+
+    refreshCategoryFilter();
+
     ///get checked categories for category filter
     var checkedCategories = [];
-    for (var categoryDiv of document.getElementById("categoryFilter").children) 
-        if(categoryDiv.children[1].checked)
+    for (var categoryDiv of document.getElementById("categoryFilter").children)
+        if (categoryDiv.children[1].checked)
             checkedCategories.push(categoryDiv.firstChild.innerHTML);
 
-    //filtering data
-    viewedProducts.filterData(
-        parseInt(document.querySelector("#priceFilterMinVal").value),
-        parseInt(document.querySelector("#priceFilterMaxVal").value),
-        checkedCategories
-    );
-    
-    displayProducts();
+    if (checkedCategories.length == 0)
+        for (var categoryCheckbox of document.querySelectorAll("#categoryFilter input[type='checkbox']"))
+            categoryCheckbox.checked = true
+
+
+    viewedProducts.filterDataByCategory(checkedCategories);
+
     setPriceFilter(viewedProducts.getMinPrice(), viewedProducts.getMaxPrice());
-    setCategoryFilter();
+    displayProducts();
+
 
 }
