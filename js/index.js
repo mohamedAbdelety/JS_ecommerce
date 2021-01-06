@@ -233,19 +233,23 @@ var viewedProducts = {
     //             (product.name.indexOf(name) != -1 || !name)
     //     })
     // },
+    filterDataByName: function(name) {
+        this.data = this.data.filter(function (product) {
+            return (product.name.toUpperCase().indexOf(name.toUpperCase()) != -1 || !name);
+        });
+    },
+
     filterDataByPrice: function (minPrice, maxPrice) {
         this.data = this.data.filter(function (product) {
             return (product.price >= minPrice || !minPrice) &&
                 (product.price <= maxPrice || !maxPrice);
         });
-        console.log(this.data);
     },
 
     filterDataByCategory: function (categories) {
         this.data = this.data.filter(function (product) {
             return  (categories.includes(product.category) || !categories|| categories.length == 0) ;
         });
-        console.log(this.data);
     },
     getProductsCountForCategory: function (category) {
         var count = 0;

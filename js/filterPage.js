@@ -1,3 +1,7 @@
+
+
+//------------------ Generating Cards Functions --------------------
+
 function createCard(product) {
     var blueClass = "";
     var redClass = "";
@@ -54,22 +58,17 @@ function displayProducts() {
     }
 }
 
-//----------------------------------------------------------------------
+//------------------ Filter Functions --------------------
 
+function setPriceFilter(currMin, currMax) {
+    currMin = currMin ? currMin : viewedProducts.getMinPrice();
+    currMax = currMax ? currMax : viewedProducts.getMaxPrice();
 
-addEventListener("onLoadProductsData", function () {
-    viewedProducts.allProducts();
-    displayProducts();
-    setPriceFilter(viewedProducts.getMinPrice(), viewedProducts.getMaxPrice());
-    setCategoryFilter();
-});
-
-function setPriceFilter(minPrice, maxPrice) {
     $("#priceFilterSlider").slider({
         range: true,
-        min: minPrice,
-        max: maxPrice,
-        values: [minPrice, maxPrice],
+        min: viewedProducts.getMinPrice(),
+        max: viewedProducts.getMaxPrice(),
+        values: [currMin, currMax],
         slide: function (event, ui) {
             $("#priceFilterMinVal").val(ui.values[0]);
             $("#priceFilterMaxVal").val(ui.values[1]);
@@ -82,12 +81,12 @@ function setPriceFilter(minPrice, maxPrice) {
 }
 
 function setCategoryFilter() {
-    document.getElementById("categoryFilter").innerHTML = "";
+   //document.getElementById("categoryFilter").innerHTML = "";
 
     for (var category of viewedProducts.getAllCategories()) {
         var categoryNode = document.createElement("div");
-        categoryNode.innerHTML = `<label for="` + category + `">` + category + `</label>
-                                  <input type="checkbox" id="` + category + `" checked />
+        categoryNode.innerHTML = `<input type="checkbox" id="` + category + `" checked />
+                                  <label for="` + category + `">` + category + `</label>
                                   <span name="` + category + `">(` + viewedProducts.getProductsCountForCategory(category) + `)</span>`;
         document.getElementById("categoryFilter").appendChild(categoryNode);
     }
@@ -97,7 +96,7 @@ function refreshCategoryFilter() {
     ///refresh category checkBox
     for (var categoryCheckbox of document.querySelectorAll("#categoryFilter input[type='checkbox']"))
         if (viewedProducts.getProductsCountForCategory(categoryCheckbox.getAttribute("id")) == 0) {
-            // categoryCheckbox.checked = false;
+            categoryCheckbox.checked = false;
             categoryCheckbox.disabled = true;
         } else
             categoryCheckbox.disabled = false;
@@ -111,20 +110,21 @@ function refreshCategoryFilter() {
 
 }
 
-function refreshPriceFilter() {
+//------------------ Add Events Listeners --------------------
 
-}
+addEventListener("onLoadProductsData", function () {
+    viewedProducts.allProducts();
+    displayProducts();
+    setPriceFilter();
+    setCategoryFilter();
+});
+
 
 document.getElementById("applyFilterBtn").onclick = function () {
 
     viewedProducts.allProducts();
 
-    //filtering data
-    // viewedProducts.filterData(
-    //     parseInt(document.querySelector("#priceFilterMinVal").value),
-    //     parseInt(document.querySelector("#priceFilterMaxVal").value),
-    //     checkedCategories
-    // );
+    viewedProducts.filterDataByName(document.querySelector("#productNameFilterTxt").value);
 
     viewedProducts.filterDataByPrice(
         parseInt(document.querySelector("#priceFilterMinVal").value),
@@ -136,8 +136,8 @@ document.getElementById("applyFilterBtn").onclick = function () {
     ///get checked categories for category filter
     var checkedCategories = [];
     for (var categoryDiv of document.getElementById("categoryFilter").children)
-        if (categoryDiv.children[1].checked)
-            checkedCategories.push(categoryDiv.firstChild.innerHTML);
+        if (categoryDiv.querySelector("input[type='checkbox']")?.checked)
+            checkedCategories.push(categoryDiv.querySelector("label").innerHTML);
 
     if (checkedCategories.length == 0)
         for (var categoryCheckbox of document.querySelectorAll("#categoryFilter input[type='checkbox']"))
@@ -146,8 +146,19 @@ document.getElementById("applyFilterBtn").onclick = function () {
 
     viewedProducts.filterDataByCategory(checkedCategories);
 
-    setPriceFilter(viewedProducts.getMinPrice(), viewedProducts.getMaxPrice());
     displayProducts();
+}
 
+document.querySelector("#priceFilterMinVal").onchange = function () {
+    setPriceFilter(
+        this.value,
+        document.querySelector("#priceFilterMaxVal").value
+    );
+}
 
+document.querySelector("#priceFilterMaxVal").onchange = function () {
+    setPriceFilter(
+        document.querySelector("#priceFilterMinVal").value,
+        this.value
+    );
 }
