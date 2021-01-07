@@ -126,9 +126,9 @@ color: white;
 
 #priceFilter input {
     display: block;
-    width: 70px;
-    font-size: 16px;
-    padding: 5px 0 5px 10px;
+    width: 85px;
+    font-size: 14px;
+    padding: 5px 0 5px 5px;
     text-align: center;
 }
 
@@ -155,7 +155,21 @@ color: white;
     transition: 0.3s;
 }
 
+/* viewed Products Preference */
+#viewedProductsPreference {
+    position: fixed;
+    top: 48px;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    padding: 15px;
+    font-weight: bold;
+}
 
-
-
-
+#currenciesSelect {
+    margin-left: 10px;
+    padding: 5px 20px;
+    border: none;
+    box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2);
+    font-size: 14px;
+}

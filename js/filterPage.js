@@ -1,5 +1,3 @@
-
-
 //------------------ Generating Cards Functions --------------------
 
 function createCard(product) {
@@ -22,12 +20,12 @@ function createCard(product) {
             <div class='container'>
                 <hr> 
                 <p class='description'>` + product.description + `</p>
-                <span>` + product.price + `</span>
-                <button onclick='changeCurrency(this,`+product.price+`)' class='currencyBtn'>Change currency</button>
+                <span>` + (product.price * (+preferredCurrency.factor) ).toFixed(2)+ ` ` + preferredCurrency.name + `</span>
+                <button onclick='changeCurrency(this,` + product.price + `)' class='currencyBtn'>Change currency</button>
                 <br>
                 <br>
                 <i onclick='heartHandler(this,` + product.id + `)' class='` + redClass + ` wishlist fas fa-heart'></i>
-                <i onclick='cartHandler(this,` +  product.id + `)' class='` + blueClass + ` cart fas fa-shopping-cart'></i>
+                <i onclick='cartHandler(this,` + product.id + `)' class='` + blueClass + ` cart fas fa-shopping-cart'></i>
                 <br>
             </div> 
         </div>`;
@@ -66,23 +64,23 @@ function setPriceFilter(currMin, currMax) {
 
     $("#priceFilterSlider").slider({
         range: true,
-        min: viewedProducts.getMinPrice(),
+        min: viewedProducts.getMinPrice() ,
         max: viewedProducts.getMaxPrice(),
         values: [currMin, currMax],
         slide: function (event, ui) {
-            $("#priceFilterMinVal").val(ui.values[0]);
-            $("#priceFilterMaxVal").val(ui.values[1]);
+            $("#priceFilterMinVal").val(+(ui.values[0]* preferredCurrency.factor).toFixed(2));
+            $("#priceFilterMaxVal").val(+(ui.values[1]* preferredCurrency.factor).toFixed(2));
         },
 
     });
 
-    $("#priceFilterMinVal").val($("#priceFilterSlider").slider("values", 0));
-    $("#priceFilterMaxVal").val($("#priceFilterSlider").slider("values", 1));
+    $("#priceFilterMinVal").val(+($("#priceFilterSlider").slider("values", 0)* preferredCurrency.factor).toFixed(2));
+    $("#priceFilterMaxVal").val(+($("#priceFilterSlider").slider("values", 1)* preferredCurrency.factor).toFixed(2));
 }
 
 
 function setCategoryFilter() {
-   //document.getElementById("categoryFilter").innerHTML = "";
+    document.getElementById("categoryFilter").innerHTML = "";
 
     for (var category of viewedProducts.getAllCategories()) {
         var categoryNode = document.createElement("div");
@@ -95,12 +93,12 @@ function setCategoryFilter() {
 
 function refreshCategoryFilter() {
     ///refresh category checkBox
-    for (var categoryCheckbox of document.querySelectorAll("#categoryFilter input[type='checkbox']"))
-        if (viewedProducts.getProductsCountForCategory(categoryCheckbox.getAttribute("id")) == 0) {
-            categoryCheckbox.checked = false;
-            categoryCheckbox.disabled = true;
-        } else
-            categoryCheckbox.disabled = false;
+    // for (var categoryCheckbox of document.querySelectorAll("#categoryFilter input[type='checkbox']"))
+    //     if (viewedProducts.getProductsCountForCategory(categoryCheckbox.getAttribute("id")) == 0) {
+    //         //categoryCheckbox.checked = false;
+    //         categoryCheckbox.disabled = true;
+    //     } else
+    //         categoryCheckbox.disabled = false;
 
     ///refresh category products count
     for (var categoryProductsCountSpan of document.querySelectorAll("#categoryFilter span"))
@@ -111,25 +109,15 @@ function refreshCategoryFilter() {
 
 }
 
-//------------------ Add Events Listeners --------------------
-
-addEventListener("onLoadProductsData", function () {
-    viewedProducts.allProducts();
-    displayProducts();
-    setPriceFilter();
-    setCategoryFilter();
-});
-
-
-document.getElementById("applyFilterBtn").onclick = function () {
+function applyFilter() {
 
     viewedProducts.allProducts();
 
     viewedProducts.filterDataByName(document.querySelector("#productNameFilterTxt").value);
 
     viewedProducts.filterDataByPrice(
-        parseInt(document.querySelector("#priceFilterMinVal").value),
-        parseInt(document.querySelector("#priceFilterMaxVal").value)
+        parseInt(document.querySelector("#priceFilterMinVal").value / preferredCurrency.factor ),
+        parseInt(document.querySelector("#priceFilterMaxVal").value / preferredCurrency.factor )
     );
 
     refreshCategoryFilter();
@@ -150,16 +138,38 @@ document.getElementById("applyFilterBtn").onclick = function () {
     displayProducts();
 }
 
+function resetFilter() {
+    viewedProducts.allProducts();
+    displayProducts();
+    setPriceFilter();
+    setCategoryFilter();
+}
+
+//------------------ Add Events Listeners --------------------
+
+addEventListener("onLoadProductsData", function () {
+    if($C.hasCookie("preferredCurrency")){
+        preferredCurrency = JSON.parse($C.getCookie("preferredCurrency"));
+        document.querySelector("#currenciesSelect").value = preferredCurrency.name
+    }
+    resetFilter();
+});
+
+
+document.getElementById("applyFilterBtn").onclick = applyFilter;
+
+document.getElementById("resetFilterBtn").onclick = resetFilter;
+
 document.querySelector("#priceFilterMinVal").onchange = function () {
     setPriceFilter(
-        this.value,
-        document.querySelector("#priceFilterMaxVal").value
+        this.value / preferredCurrency.factor,
+        document.querySelector("#priceFilterMaxVal").value / preferredCurrency.factor
     );
 }
 
 document.querySelector("#priceFilterMaxVal").onchange = function () {
     setPriceFilter(
-        document.querySelector("#priceFilterMinVal").value,
-        this.value
+        document.querySelector("#priceFilterMinVal").value / preferredCurrency.factor,
+        this.value / preferredCurrency.factor
     );
 }

@@ -185,32 +185,6 @@ var Cart = {
 /*==========================================================================*/
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*Wish List*/
 /*
 -WishList.wishListItems: Array if all liked items IDs;
