@@ -1,158 +1,51 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title> M3B | Wish List </title>
-        <meta name="description" content="">
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" href="image/logo.png">
-        <link rel="stylesheet" href="css/font-awesome.min.css">
-        <link rel="stylesheet" href="css/style.css">
-    </head>
+<html lang="en">
 
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M3B | WishList</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/wish.css">
 
-        
-        
-        <section class="navbar">
-            <ul>
-                <li><i class="fa fa-facebook"></i></li>
-                <li><i class="fa fa-twitter"></i></li>
-                <li><i class="fa fa-instagram"></i></li>
-                <li><i class="fa fa-linkedin"></i></li>
-            </ul>
-            <div class="contact">
-                <span>
-                    <i class=" fa fa-phone"></i>
-                        +(02) 12852788
-                </span>
-                <span>
-                    <i class=" fa fa-envelope"></i>
-                    shop@gmail.com
-                </span>
-            </div>
-        </section>
-        <div class="second-nav">
-            <a class="logo" href="index.html">
-                <img src="image/logo.png">
+</head>
+<body>
+
+    
+    <div class="second-nav">
+        <a class="logo" href="index.html">
+            <img src="image/logo.png">
+        </a>
+        <ul>
+            <li class="home-link active"><a href="index.html#home">Home</a></li>
+            <li><a class="about-link" href="index.html#about">About Us</a></li>
+            <li><a class="product-link" href="category.html">Some Products</a class="about-link"></li>
+            <li><a class="leaderShip-link" href="index.html#LeaderShip">LeaderShip</a class="about-link"></li>
+            <li><a class="contact-link" href="index.html#contact">Contact</a class="about-link"></li>
+        </ul>
+        <div>
+            <a href="wish.html">
+                <i class="fa fa-heart-o"></i>
+                <span id="wishCountSpan" class="label" style="right: 200px;">0</span>
             </a>
-            <ul>
-                <li class="home-link active"><a href="index.html#home">Home</a></li>
-                <li><a class="about-link" href="index.html#about">About Us</a></li>
-                <li><a class="product-link" href="index.html#some_product">Some Products</a class="about-link"></li>
-                <li><a class="leaderShip-link" href="index.html#LeaderShip">LeaderShip</a class="about-link"></li>
-                <li><a class="contact-link" href="index.html#contact">Contact</a class="about-link"></li>
-            </ul>
-            <div>
-                <a href="wish.html">
-                    <i class="fa fa-heart-o"></i>
-                    <span  id="wishCountSpan" class="label" style="right: 200px;">0</span>
-                </a>
-                <a href="cart.html">
-                    <i class="fa fa-shopping-cart"></i>
-                    <span id="cartCountSpan" class="label" style="right: 120px;">0</span>
-                </a>
-            </div>
+            <a href="cart.html">
+                <i class="fa fa-shopping-cart"></i>
+                <span id="cartCountSpan" class="label" style="right: 120px;">0</span>
+            </a>
         </div>
-        <section class="banner2">
-            <div class="overlay-cart-panner">
-            </div>
-        </section>  
-       
+    </div>
 
-        <section class="wish-list">
-            <div class="container">
-                <!-- here -->
-            </div>
-        </section>
-       
+   
+    <div id="cardContainer"></div>
 
 
-
-        <section class="footer">
-            <div class="container">
-                <div>
-                    <h3><span>C</span>ategories</h3>
-                    <ul>
-                        <li>
-                            <a href="#">Electronic</a>
-                        </li>
-                        <li>
-                            <a href="#">Fashion</a>
-                        </li>
-                        <li>
-                            <a href="#">Computing</a>
-                        </li>
-                        <li>
-                            <a href="#">Sporting</a>
-                        </li>
-                       
-                    </ul>
-                </div>
-                <div>
-                    <h3><span>S</span>ervice</h3>
-                    <ul>
-                        
-                        <li>
-                            <a href="wish.html">
-                            Wishes List
-                            </a>
-                        </li>
-                        <li>
-                            <a href="cart.html">
-                                Shopping Cart
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Transfer
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h3>
-                        <span>G</span>ET IN TOUCH
-                    </h3>
-                    <p class="get-text">
-                        Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
-                    </p>
-
-                    <div class="icons-group">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                    </div>
-                </div>
-                <div class="shop-img">
-                        <div class="mask">
-                            
-                            <img src="image/ecommerce-2140603_1920.jpg">
-                            <div class="overlay2"></div>
-                        </div>
-                </div class="mask">
-            </div>                
-            
-            
-            <div class="footerending">
-                <div>
-                   
-                    <a href="#">
-                        <img src="image/icons/payment-method.png" style="color: #fff;" alt="ICON-PAY">
-                    </a>
-                </div>
-                <p class="Copyright">
-                    Copyright <span>ITI_INTAKE</span> 41 M3B ©<script>document.write(new Date().getFullYear());</script> All rights reserved
-                </p>
-            </div>
-        
-        </section>
-        <script src="js/jquery-3.1.1.min.js"></script>
-        <script src="js/design.js"></script>
-        <script src="js/cookies.js"></script>
-        <script src="js/index.js"></script>
-    </body>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="js/changeCurrency.js"></script>
+    <script src="js/cookies.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/wishlistCards.js"></script>
+</body>
 
 </html>

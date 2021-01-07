@@ -19,7 +19,7 @@ function createCard(product) {
         `<div class='card'>
             <img src=/image/items/` + product.image + `>
             <div class='productName'>` + product.name + `</div>
-            <div class='container'>
+            <div class='_container'>
                 <hr> 
                 <p class='description'>` + product.description + `</p>
                 <span>` + product.price + `</span>
@@ -46,8 +46,11 @@ function heartHandler(icon, itemId) {
 }
 
 function cartHandler(icon, itemId) {
-    icon.classList.add("blue");
-    Cart.addCartItem(new CartItem(itemId));
+    
+    if (!((icon.classList["value"]).split(" ")).includes ("blue")){
+        icon.classList.add("blue");
+        Cart.addCartItem(new CartItem(itemId));
+    }
     document.getElementById("cartCountSpan").innerText = Cart.cartItemsCount();
 }
 
