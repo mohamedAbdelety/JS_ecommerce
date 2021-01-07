@@ -1,7 +1,6 @@
 onload = function(){
         
 function intiTable(){
-    document.getElementById("cartCountSpan").innerText = Cart.cartItemsCount();
     var CartRow = '';
     var product;
     $("#cartTableBody").html("");
@@ -20,7 +19,7 @@ function intiTable(){
             CartRow = `
                 <tr>
                     <td>${product.name}</td>
-                    <td title="${product.Descrption}">${product.Descrption.substr(0,45)}</td>
+                    <td title="${product.description}">${product.description.substr(0,45)}</td>
                     <td>
                         <a href="image/items/${product.image}">
                             <img src="image/items/${product.image}" width="100px">
@@ -85,6 +84,7 @@ $("#emptycart").on("click",function(){
     var check = confirm("are you sure to delete all items in cart");
     if(check){
         Cart.removeAllCartItems();
+        document.getElementById("cartCountSpan").innerText = Cart.cartItemsCount();
         intiTable();
     }
 });

@@ -26,8 +26,8 @@ function createCard(product) {
                 <button onclick='changeCurrency(this,`+product.price+`)' class='currencyBtn'>Change currency</button>
                 <br>
                 <br>
-                <i onclick='heartHandler(this,` + product.id + `)' class='` + redClass + ` wishlist fas fa-heart'></i>
-                <i onclick='cartHandler(this,` +  product.id + `)' class='` + blueClass + ` cart fas fa-shopping-cart'></i>
+                <i onclick='heartHandler(this,` + product.id + `)' class='` + redClass + ` wishlist fa fa-heart'></i>
+                <i onclick='cartHandler(this,` +  product.id + `)' class='` + blueClass + ` cart fa fa-shopping-cart'></i>
                 <br>
             </div> 
         </div>`;
@@ -42,13 +42,17 @@ function heartHandler(icon, itemId) {
     } else {
         WishList.removeWishListItem(itemId);
     }
+    document.getElementById("wishCountSpan").innerText = WishList.wishListItemsCount();
 }
 
 function cartHandler(icon, itemId) {
     icon.classList.add("blue");
     Cart.addCartItem(new CartItem(itemId));
-
+    document.getElementById("cartCountSpan").innerText = Cart.cartItemsCount();
 }
+
+
+
 
 function displayProducts() {
     document.getElementById("cardContainer").innerHTML = "";

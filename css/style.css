@@ -193,7 +193,7 @@ ul .fa {
 
 
 
-.banner button{
+.banner a{
     background: #2577fd;
     text-transform: capitalize;
     color: #fff;
@@ -206,9 +206,10 @@ ul .fa {
     border-radius: 25px;
     margin-left: 100px;
     margin-top: 20px;
+    text-decoration: none;
     transition: all .2s linear;
 }
-.banner button:hover{
+.banner a:hover{
     background: #55ACEE;
 }
 
