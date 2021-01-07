@@ -20,7 +20,7 @@ function createCard(product) {
             <div class='container'>
                 <hr> 
                 <p class='description'>` + product.description + `</p>
-                <span>` + (product.price * (+preferredCurrency.factor) ).toFixed(2)+ ` ` + preferredCurrency.name + `</span>
+                <span>` + PreferredCurrency.symbol+ ` ` + (product.price * (+PreferredCurrency.factor)).toFixed(2) + `</span>
                 <button onclick='changeCurrency(this,` + product.price + `)' class='currencyBtn'>Change currency</button>
                 <br>
                 <br>
@@ -64,18 +64,18 @@ function setPriceFilter(currMin, currMax) {
 
     $("#priceFilterSlider").slider({
         range: true,
-        min: viewedProducts.getMinPrice() ,
+        min: viewedProducts.getMinPrice(),
         max: viewedProducts.getMaxPrice(),
         values: [currMin, currMax],
         slide: function (event, ui) {
-            $("#priceFilterMinVal").val(+(ui.values[0]* preferredCurrency.factor).toFixed(2));
-            $("#priceFilterMaxVal").val(+(ui.values[1]* preferredCurrency.factor).toFixed(2));
+            $("#priceFilterMinVal").val(+(ui.values[0] * PreferredCurrency.factor).toFixed(2));
+            $("#priceFilterMaxVal").val(+(ui.values[1] * PreferredCurrency.factor).toFixed(2));
         },
 
     });
 
-    $("#priceFilterMinVal").val(+($("#priceFilterSlider").slider("values", 0)* preferredCurrency.factor).toFixed(2));
-    $("#priceFilterMaxVal").val(+($("#priceFilterSlider").slider("values", 1)* preferredCurrency.factor).toFixed(2));
+    $("#priceFilterMinVal").val(+($("#priceFilterSlider").slider("values", 0) * PreferredCurrency.factor).toFixed(2));
+    $("#priceFilterMaxVal").val(+($("#priceFilterSlider").slider("values", 1) * PreferredCurrency.factor).toFixed(2));
 }
 
 function setCategoryFilter() {
@@ -115,8 +115,8 @@ function applyFilter() {
     viewedProducts.filterDataByName(document.querySelector("#productNameFilterTxt").value);
 
     viewedProducts.filterDataByPrice(
-        parseInt(document.querySelector("#priceFilterMinVal").value / preferredCurrency.factor ),
-        parseInt(document.querySelector("#priceFilterMaxVal").value / preferredCurrency.factor )
+        parseInt(document.querySelector("#priceFilterMinVal").value / PreferredCurrency.factor),
+        parseInt(document.querySelector("#priceFilterMaxVal").value / PreferredCurrency.factor)
     );
 
     refreshCategoryFilter();
@@ -145,13 +145,15 @@ function resetFilter() {
 }
 //--------------Currency Conversion Functions---------------
 
-var preferredCurrency = {
-    name: "USD",
+var PreferredCurrency = {
+    id: "USD",
+    symbol: "$",
     factor: 1
 };
+const key = "a372b2517afcf282ec51";
 
-function changePricesCurrency(toType = "EGP") {
-    const key = "a372b2517afcf282ec51";
+function changePricesCurrency(toType = "EGP", currencySymbol) {
+
     var url = "https://free.currconv.com/api/v7/convert?q=USD_" + toType + "&compact=ultra&apiKey=" + key;
     const xhr = new XMLHttpRequest();
     xhr.open("GET", url)
@@ -160,9 +162,10 @@ function changePricesCurrency(toType = "EGP") {
     xhr.onreadystatechange = function () {
         if (this.readyState === this.DONE)
             if (xhr.status == 200) {
-                preferredCurrency.name = toType;
-                preferredCurrency.factor = JSON.parse(this.responseText)["USD_" + toType];
-                $C.setCookie("preferredCurrency", JSON.stringify(preferredCurrency));
+                PreferredCurrency.id = toType;
+                PreferredCurrency.symbol = currencySymbol;
+                PreferredCurrency.factor = JSON.parse(this.responseText)["USD_" + toType];
+                $C.setCookie("preferredCurrency", JSON.stringify(PreferredCurrency));
                 displayProducts();
                 setPriceFilter();
             } else
@@ -172,15 +175,39 @@ function changePricesCurrency(toType = "EGP") {
 
 }
 
+function generateCurrenciesList() {
+    var url = "https://free.currconv.com/api/v7/currencies?apiKey=" + key;
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", url)
+    xhr.send("");
+
+    xhr.onreadystatechange = function () {
+        if (this.readyState === this.DONE)
+            if (xhr.status == 200) {
+                var currenciesResult = JSON.parse(this.responseText).results;
+                for (var currency in currenciesResult) {
+                    var currencyOption = document.createElement("option");
+                    currencyOption.innerHTML = currenciesResult[currency].currencyName;
+                    currencyOption.id = currenciesResult[currency].id;
+                    currencyOption.value = currenciesResult[currency].currencySymbol??currenciesResult[currency].id;
+                    if(currencyOption.id == PreferredCurrency.id)
+                        currencyOption.selected = 'selected';
+  
+                    document.querySelector("#currenciesSelect").appendChild(currencyOption);
+                }
+            } else
+                alert("failed to add currencies [Error" + xhr.status +"]");
+
+    }
+}
+
 //------------------ Add Events Listeners --------------------
 
 addEventListener("onLoadProductsData", function () {
-    if($C.hasCookie("preferredCurrency")){
-        preferredCurrency = JSON.parse($C.getCookie("preferredCurrency"));
-        document.querySelector("#currenciesSelect").value = preferredCurrency.name
-    }
     resetFilter();
+    
 });
+
 
 document.getElementById("applyFilterBtn").onclick = applyFilter;
 
@@ -188,18 +215,31 @@ document.getElementById("resetFilterBtn").onclick = resetFilter;
 
 document.querySelector("#priceFilterMinVal").onchange = function () {
     setPriceFilter(
-        this.value / preferredCurrency.factor,
-        document.querySelector("#priceFilterMaxVal").value / preferredCurrency.factor
+        this.value / PreferredCurrency.factor,
+        document.querySelector("#priceFilterMaxVal").value / PreferredCurrency.factor
     );
 }
 
 document.querySelector("#priceFilterMaxVal").onchange = function () {
     setPriceFilter(
-        document.querySelector("#priceFilterMinVal").value / preferredCurrency.factor,
-        this.value / preferredCurrency.factor
+        document.querySelector("#priceFilterMinVal").value / PreferredCurrency.factor,
+        this.value / PreferredCurrency.factor
     );
 }
 
 document.querySelector("#currenciesSelect").onchange = function () {
-    changePricesCurrency(this.value);
+    changePricesCurrency(this.options[this.selectedIndex].id, this.value);
 }
+
+
+//------------------ initiate things --------------------
+
+!function (){
+    if($C.hasCookie("preferredCurrency"))
+        PreferredCurrency = JSON.parse($C.getCookie("preferredCurrency"));
+
+    generateCurrenciesList();
+
+    //to refresh currency factor
+    changePricesCurrency(PreferredCurrency.id, PreferredCurrency.symbol);
+}();
