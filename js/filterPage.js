@@ -78,7 +78,6 @@ function setPriceFilter(currMin, currMax) {
     $("#priceFilterMaxVal").val(+($("#priceFilterSlider").slider("values", 1)* preferredCurrency.factor).toFixed(2));
 }
 
-
 function setCategoryFilter() {
     document.getElementById("categoryFilter").innerHTML = "";
 
@@ -144,6 +143,34 @@ function resetFilter() {
     setPriceFilter();
     setCategoryFilter();
 }
+//--------------Currency Conversion Functions---------------
+
+var preferredCurrency = {
+    name: "USD",
+    factor: 1
+};
+
+function changePricesCurrency(toType = "EGP") {
+    const key = "a372b2517afcf282ec51";
+    var url = "https://free.currconv.com/api/v7/convert?q=USD_" + toType + "&compact=ultra&apiKey=" + key;
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", url)
+    xhr.send("");
+
+    xhr.onreadystatechange = function () {
+        if (this.readyState === this.DONE)
+            if (xhr.status == 200) {
+                preferredCurrency.name = toType;
+                preferredCurrency.factor = JSON.parse(this.responseText)["USD_" + toType];
+                $C.setCookie("preferredCurrency", JSON.stringify(preferredCurrency));
+                displayProducts();
+                setPriceFilter();
+            } else
+                alert("failed to change currency");
+
+    }
+
+}
 
 //------------------ Add Events Listeners --------------------
 
@@ -154,7 +181,6 @@ addEventListener("onLoadProductsData", function () {
     }
     resetFilter();
 });
-
 
 document.getElementById("applyFilterBtn").onclick = applyFilter;
 
@@ -172,4 +198,8 @@ document.querySelector("#priceFilterMaxVal").onchange = function () {
         document.querySelector("#priceFilterMinVal").value / preferredCurrency.factor,
         this.value / preferredCurrency.factor
     );
+}
+
+document.querySelector("#currenciesSelect").onchange = function () {
+    changePricesCurrency(this.value);
 }

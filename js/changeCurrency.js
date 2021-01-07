@@ -1,7 +1,4 @@
-var preferredCurrency = {
-    name: "USD",
-    factor: 1
-};
+
 
 /*
 function changePricesCurrency(toType = "EGP") {
@@ -35,37 +32,5 @@ function changePricesCurrency(toType = "EGP") {
 }
 */
 
-function changePricesCurrency(toType = "EGP") {
-    const key = "a372b2517afcf282ec51";
-    var url = "https://free.currconv.com/api/v7/convert?q=USD_" + toType + "&compact=ultra&callback=sampleCallback&apiKey=" + key;
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", url)
-    xhr.send("");
-
-    xhr.onreadystatechange = function () {
-        if (this.readyState === this.DONE)
-            if (xhr.status == 200) {
-                preferredCurrency.name = toType;
-                preferredCurrency.factor = parseFloat(this.responseText.split('{')[1].split('}')[0].split(':')[1]);;
-                $C.setCookie("preferredCurrency", JSON.stringify(preferredCurrency));
-                displayProducts();
-                setPriceFilter();
-            } else
-                alert("failed to change currency");
-
-    }
-
-}
 
 
-document.querySelector("#currenciesSelect").onchange = function () {
-    if (this.value == "USD") {
-        preferredCurrency.name = "USD";
-        preferredCurrency.factor = 1;
-        $C.setCookie("preferredCurrency", JSON.stringify(preferredCurrency));
-        displayProducts();
-        setPriceFilter();
-
-    } else
-        changePricesCurrency(this.value);
-}
