@@ -21,16 +21,8 @@ function createCard(product) {
                 <hr> 
                 <p class='description'>` + product.description + `</p>
                 <span>` + PreferredCurrency.symbol+ ` ` + (product.price * (+PreferredCurrency.factor)).toFixed(2) + `</span>
-                <button onclick='changeCurrency(this,` + product.price + `)' class='currencyBtn'>Change currency</button>
-                <br>
-                <br>
-<<<<<<< HEAD
-                <i onclick='heartHandler(this,` + product.id + `)' class='` + redClass + ` wishlist fas fa-heart'></i>
-                <i onclick='cartHandler(this,` + product.id + `)' class='` + blueClass + ` cart fas fa-shopping-cart'></i>
-=======
                 <i onclick='heartHandler(this,` + product.id + `)' class='` + redClass + ` wishlist fa fa-heart'></i>
                 <i onclick='cartHandler(this,` +  product.id + `)' class='` + blueClass + ` cart fa fa-shopping-cart'></i>
->>>>>>> b0799697d5852b922eeac7fb5c715f52397b14ed
                 <br>
             </div> 
         </div>`;
@@ -88,6 +80,9 @@ function setPriceFilter(currMin, currMax) {
 
     $("#priceFilterMinVal").val(+($("#priceFilterSlider").slider("values", 0) * PreferredCurrency.factor).toFixed(2));
     $("#priceFilterMaxVal").val(+($("#priceFilterSlider").slider("values", 1) * PreferredCurrency.factor).toFixed(2));
+
+    $(".filterCurrencySymbol").html("(" + PreferredCurrency.symbol + ")");
+
 }
 
 function setCategoryFilter() {
@@ -180,6 +175,7 @@ function changePricesCurrency(toType = "EGP", currencySymbol) {
                 $C.setCookie("preferredCurrency", JSON.stringify(PreferredCurrency));
                 displayProducts();
                 setPriceFilter();
+                
             } else
                 alert("failed to change currency");
 

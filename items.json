@@ -44,7 +44,6 @@
 		"price":540,
 		"quantity":1,
 		"description":"simple descrption "
-<<<<<<< HEAD
 	},
 	{
 		"id":6,
@@ -90,8 +89,6 @@
 		"price":540,
 		"quantity":1,
 		"description":"simple descrption "
-=======
->>>>>>> b0799697d5852b922eeac7fb5c715f52397b14ed
 	}
 
 ]
