@@ -321,3 +321,15 @@ addEventListener("onLoadProductsData", function () {
 });
 
 
+
+
+
+
+// Open filterd categories
+$("#categoriesSelector li a").click((function (e) { 
+   e.preventDefault();
+   var selectedCategorie=this.innerText.toLowerCase();
+   var catPage=open("../category.html","_self",false);
+   $C.setCookie("selectedCat",selectedCategorie);
+
+})); 

@@ -90,11 +90,20 @@ function setCategoryFilter() {
 
     for (var category of viewedProducts.getAllCategories()) {
         var categoryNode = document.createElement("div");
-        categoryNode.innerHTML = `<input type="checkbox" id="` + category + `" checked />
+        var checked="checked";
+        if ($C.getCookie("selectedCat")!="undefined"){
+            console.log($C.getCookie("selectedCat"));
+            console.log(category)
+            checked=$C.getCookie("selectedCat")==category?"checked":"disabled";
+
+        }
+        
+            categoryNode.innerHTML = `<input type="checkbox" id="` + category + `" `+checked+` />
                                   <label for="` + category + `">` + category + `</label>
                                   <span name="` + category + `">(` + viewedProducts.getProductsCountForCategory(category) + `)</span>`;
         document.getElementById("categoryFilter").appendChild(categoryNode);
     }
+    
 }
 
 function refreshCategoryFilter() {
@@ -145,10 +154,12 @@ function applyFilter() {
 }
 
 function resetFilter() {
+
     viewedProducts.allProducts();
     displayProducts();
     setPriceFilter();
     setCategoryFilter();
+
 }
 //--------------Currency Conversion Functions---------------
 
@@ -212,7 +223,17 @@ function generateCurrenciesList() {
 //------------------ Add Events Listeners --------------------
 
 addEventListener("onLoadProductsData", function () {
-    resetFilter();
+    viewedProducts.allProducts();
+    setPriceFilter();
+    setCategoryFilter();
+    if ($C.getCookie("selectedCat")!="undefined"){
+        viewedProducts.filterDataByCategory($C.getCookie("selectedCat"));
+    }
+    $C.deleteCookie("selectedCat");
+    displayProducts();
+    //viewedProducts.allProducts();
+    
+    
     
 });
 
@@ -251,3 +272,4 @@ document.querySelector("#currenciesSelect").onchange = function () {
     //to refresh currency factor
     changePricesCurrency(PreferredCurrency.id, PreferredCurrency.symbol);
 }();
+
