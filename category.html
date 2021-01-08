@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M3B | WishList</title>
+    <title>M3B | category</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/wish.css">
+    <link rel="stylesheet" href="css/category.css">
 
 </head>
 <body>
@@ -36,16 +36,55 @@
         </div>
     </div>
 
-   
-    <div id="cardContainer"></div>
+    <div class="filter">
 
+        <!-- name filter -->
+
+        <div id="nameFilter">
+            <label>Name</label>
+            <input class="myinputtext" id="productNameFilterTxt" placeholder="Search by product name">
+        </div>
+        <hr>
+
+        <!-- price filter -->
+        <div id="priceFilter">
+            <label>Price</label>
+
+            <div id="priceFilterMin">
+                <label for="priceFilterMinVal">From</label>
+                <input class="myinputtext" type="number" min="0" id="priceFilterMinVal">
+            </div>
+
+            <div id="priceFilterMax">
+                <label for="priceFilterMaxVal">To</label>
+                <input class="myinputtext" type="number" min="0" id="priceFilterMaxVal">
+            </div>
+
+            <div id="priceFilterSlider"></div>
+        </div>
+        <hr>
+
+        <!-- category filter -->
+        <div id="categoryFilter">
+            <label>Category</label>  
+        </div>
+
+        <button class="mybtn btn-search" id="applyFilterBtn">
+            <i class="fa fa-search"></i> Apply
+        </button>
+        
+
+    </div>
+
+
+    <div id="cardContainer"></div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="js/changeCurrency.js"></script>
     <script src="js/cookies.js"></script>
     <script src="js/index.js"></script>
-    <script src="js/wishlistCards.js"></script>
+    <script src="js/filterPage.js"></script>
 </body>
 
 </html>

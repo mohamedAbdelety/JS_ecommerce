@@ -1,7 +1,6 @@
 onload = function(){
         
 function intiTable(){
-    document.getElementById("cartCountSpan").innerText = Cart.cartItemsCount();
     var CartRow = '';
     var product;
     $("#cartTableBody").html("");
@@ -85,6 +84,7 @@ $("#emptycart").on("click",function(){
     var check = confirm("are you sure to delete all items in cart");
     if(check){
         Cart.removeAllCartItems();
+        document.getElementById("cartCountSpan").innerText = Cart.cartItemsCount();
         intiTable();
     }
 });

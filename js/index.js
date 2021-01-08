@@ -316,6 +316,8 @@ var e = new Event("onLoadProductsData");
 addEventListener("onLoadProductsData", function () {
     Cart.importFromCookie();
     WishList.importFromCookie();
+    document.getElementById("cartCountSpan").innerText = Cart.cartItemsCount();
+    document.getElementById("wishCountSpan").innerText = WishList.wishListItemsCount();
 });
 
 
