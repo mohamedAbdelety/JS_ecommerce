@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title> M3B | Home </title>
+        <meta name="description" content="">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/font-awesome.min.css">
         <link rel="stylesheet" href="css/style.css">
     </head>
 
     <body>
+
+        
         
         <section class="navbar">
             <ul>
@@ -26,25 +32,25 @@
             </div>
         </section>
         <div class="second-nav">
-            <a class="logo" href="#">
+            <a class="logo" href="index.html">
                 <img src="image/logo.png">
             </a>
             <ul>
-                <li class="home-link active"><a href="#home">Home</a></li>
-                <li><a class="about-link" href="#about">About Us</a></li>
-                <li><a class="product-link" href="#some_product">Some Products</a class="about-link"></li>
-                <li><a class="leaderShip-link" href="#LeaderShip">LeaderShip</a class="about-link"></li>
-                <li><a class="contact-link" href="#contact">Contact</a class="about-link"></li>
+                <li class="home-link active"><a href="index.html#home">Home</a></li>
+                <li><a class="about-link" href="index.html#about">About Us</a></li>
+                <li><a class="product-link" href="index.html#some_product">Some Products</a class="about-link"></li>
+                <li><a class="leaderShip-link" href="index.html#LeaderShip">LeaderShip</a class="about-link"></li>
+                <li><a class="contact-link" href="index.html#contact">Contact</a class="about-link"></li>
             </ul>
             <div>
-                <span>
+                <a href="wish.html">
                     <i class="fa fa-heart-o"></i>
-                    <span class="label" style="right: 200px;">01</span>
-                </span>
-                <span>
+                    <span id="wishCountSpan" class="label" style="right: 200px;">0</span>
+                </a>
+                <a href="cart.html">
                     <i class="fa fa-shopping-cart"></i>
-                    <span class="label" style="right: 120px;">04</span>
-                </span>
+                    <span id="cartCountSpan" class="label" style="right: 120px;">0</span>
+                </a>
             </div>
         </div>
         <section class="banner">
@@ -56,19 +62,96 @@
                     <p>Shop with us and enjoy by our discounts.
                         electronic , computing , sporting and many other section. Please spread a website to your friends.
                     </p>
-                    <button class="btn">Shop Now</button>
+                    <a href="category.html" class="btn">Shop Now</a>
                 </div>
             </div>
         </section>  
         
         <section id="about">
-            about
+            <h2><span>A</span>bout <span>U</span>s</h2>
+            <p class="aboutpragraph">
+               M3B company aims to acheive fast succeful through satisfied group of clients . have small group of categeroies but is very important for your family. enjoy with our categories
+            </p>       
+            <div class="main-cat">
+                <div class="text-effect">
+                    <img src="image/pexels-andrea-piacquadio-914927.jpg">
+                </div>
+                <div class="text-effect">
+                    <img src="image/computing.jpg">
+                </div>
+                <div class="text-effect">
+                    <img src="image/sporting.jpg">
+                </div>
+            </div>
         </section>
 
         <section id="some_product">
-            Some product
+           
+            <div class="sub-some">
+                <div class="sub-some-img">
+                    <img src="image/model_1_bg.jpg">
+                </div>
+                <div>
+
+                    <h2>About Our Products</h2>
+                    
+                    The products available through our website are characterized by the quality of raw materials and accuracy of manufacture and are available at reasonable prices for all categories
+
+                    After-sales service, exchange or refund is available through our website, within a maximum period of 14 days
+
+                    Do not be worried about using electronic payment. It is available through the site. Full insurance and protection for your personal misfortunes only enjoy our services and prices.
+
+                    The products on the site are divided into sections to facilitate access to what you want
+
+                </div>
+            </div>
         </section>
 
+        <section id="leadership">
+            <h2><span>L</span>eadership</h2>
+             <div class="teammembers">
+                 <div>
+                     <img src="image/person_3.jpg">
+                     <h3>Mohamed Abdelaty</h3>
+                     <h5>ITI SD PD</h5>
+                     <p>
+                         <i class="fa fa-facebook"></i>
+                         <i class="fa fa-twitter"></i>
+                         <i class="fa fa-linkedin"></i>
+                     </p>
+                 </div>
+                 <div>
+                    <img src="image/person_3.jpg">
+                    <h3>Mahmoud Naser</h3>
+                    <h5>ITI SD PD</h5>
+                    <p>
+                        <i class="fa fa-facebook"></i>
+                        <i class="fa fa-twitter"></i>
+                        <i class="fa fa-linkedin"></i>
+                    </p>
+                </div>
+                <div>
+                    <img src="image/person_3.jpg">
+                    <h3>Bardis Maher</h3>
+                    <h5>ITI SD SWA</h5>
+                    <p>
+                        <i class="fa fa-facebook"></i>
+                        <i class="fa fa-twitter"></i>
+                        <i class="fa fa-linkedin"></i>
+                    </p>
+                </div>
+                <div>
+                    <img src="image/person_3.jpg">
+                    <h3>Mina Khalaf</h3>
+                    <h5>ITI SD PD</h5>
+                    <p>
+                        <i class="fa fa-facebook"></i>
+                        <i class="fa fa-twitter"></i>
+                        <i class="fa fa-linkedin"></i>
+                    </p>
+                </div>
+             </div>
+        </section>
 
         <section id="contact">
             <h2><span>C</span>ontact</h2>       
@@ -128,12 +211,12 @@
                     <ul>
                         
                         <li>
-                            <a href="#">
+                            <a href="wish.html">
                             Wishes List
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="cart.html">
                                 Shopping Cart
                             </a>
                         </li>
@@ -185,9 +268,10 @@
         </section>
 
         <script src="js/jquery-3.1.1.min.js"></script>
+        <script src="js/cookies.js"></script>
         <script src="js/design.js"></script>
+        <script src="js/cookies.js"></script>
         <script src="js/index.js"></script>
-
     </body>
 
 </html>

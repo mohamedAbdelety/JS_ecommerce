@@ -14,6 +14,7 @@ function ProductsStore() {
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 data = JSON.parse(xhr.responseText);
+                dispatchEvent(e);
             }
         }
     })();
@@ -29,6 +30,9 @@ function ProductsStore() {
         throw "Product id not found in the ProductStore";
     }
 }
+
+
+
 ProductsStore.counter = 0;
 var Item = function (_id, _name, _category, _image, _price, _quantity, _desc) {
     this.id = _id;
@@ -40,9 +44,6 @@ var Item = function (_id, _name, _category, _image, _price, _quantity, _desc) {
     this.desc = _desc;
 };
 /*=============================================================================*/
-
-
-
 
 
 //Cart Items Constructor ,cart object has only two attributes:
@@ -101,6 +102,19 @@ var Cart = {
         this.updateCartCookie();
     },
 
+
+    // new array to update old cartitems
+    saveCartUpdate: function(_newCartItems){
+        this.cartItems = [];
+        for (var cartItem of _newCartItems){
+            this.cartItems.push(cartItem);
+        }
+        this.updateCartCookie();
+    },
+
+
+
+
     removeAllCartItems: function () {
         this.cartItems = [];
         this.updateCartCookie();
@@ -141,9 +155,9 @@ var Cart = {
             var expireDate = new Date();
             expireDate.setMonth(expireDate.getMonth() + 1);
             $C.setCookie("cart", cookieStr, expireDate);
-        }
+    },
 
-        ,
+
     importFromCookie: function () {
         if ($C.hasCookie("cart")) {
             for (var cartItem of JSON.parse($C.getCookie("cart")))
@@ -151,7 +165,7 @@ var Cart = {
         }
 
     },
-    
+
     cartTotalPrice: function () {
         var sum = 0;
         for (var item of this.cartItems) {
@@ -161,16 +175,14 @@ var Cart = {
 
     },
 
-    cartItemsCount :function() {
+    cartItemsCount: function () {
         var result = 0;
         for (var cartItem of this.cartItems)
-            result+= cartItem.quantity;
+            result += cartItem.quantity;
         return result;
     }
 }
 /*==========================================================================*/
-
-
 
 
 /*Wish List*/
@@ -211,7 +223,7 @@ var WishList = {
                 this.wishListItems.push(likedItem);
         }
     },
-    wishListItemsCount :function() {
+    wishListItemsCount: function () {
         return this.wishListItems.length;
     }
 }
@@ -229,50 +241,83 @@ var viewedProducts = {
         this.data = store.getItems();
     },
 
-    filter: function (minPrice, maxPrice, category, name) {
-        this.allProducts();
+    // filterData: function (minPrice, maxPrice, categories, name) {
+    //     this.allProducts();
+    //     this.data = this.data.filter(function (product) {
+    //         return (product.price >= minPrice || !minPrice) &&
+    //             (product.price <= maxPrice || !maxPrice) &&
+    //             (categories.includes(product.category) || !categories || categories.length == 0) &&
+    //             (product.name.indexOf(name) != -1 || !name)
+    //     })
+    // },
+    filterDataByName: function(name) {
         this.data = this.data.filter(function (product) {
-            return (product.price > minPrice || !minPrice) &&
-                (product.price < maxPrice || !maxPrice) &&
-                (product.category == category || !category) &&
-                (product.name.indexOf(name) != -1 || !name)
-        })
+            return (product.name.toUpperCase().indexOf(name.toUpperCase()) != -1 || !name);
+        });
+    },
+
+    filterDataByPrice: function (minPrice, maxPrice) {
+        this.data = this.data.filter(function (product) {
+            return (product.price >= minPrice || !minPrice) &&
+                (product.price <= maxPrice || !maxPrice);
+        });
+    },
+
+    filterDataByCategory: function (categories) {
+        this.data = this.data.filter(function (product) {
+            return  (categories.includes(product.category) || !categories|| categories.length == 0) ;
+        });
+    },
+    getProductsCountForCategory: function (category) {
+        var count = 0;
+        for (var product of this.data)
+            if (product.category == category)
+                count++;
+        return count;
+    },
+
+    getMaxPrice: function () {
+        var maxPrice = 0;
+        for (var product of this.data)
+            if (product.price > maxPrice)
+                maxPrice = product.price;
+        return maxPrice;
+    },
+
+    getMinPrice: function () {
+        if (this.data.length == 0)
+            return 0;
+        var minPrice = this.data[0].price;
+        for (var product of this.data)
+            if (product.price < minPrice)
+                minPrice = product.price;
+        return minPrice;
+    },
+
+    getAllCategories: function () {
+        var categories = [];
+        for (var product of store.getItems())
+            if (!categories.includes(product.category))
+                categories.push(product.category);
+        return categories;
     }
 
 }
 
 
 /*==================================================================================================*/
+
+
 //initializing data
 var store = new ProductsStore();
 
 
-
+var e = new Event("onLoadProductsData");
 addEventListener("onLoadProductsData", function () {
-    viewedProducts.allProducts();
     Cart.importFromCookie();
     WishList.importFromCookie();
+    document.getElementById("cartCountSpan").innerText = Cart.cartItemsCount();
+    document.getElementById("wishCountSpan").innerText = WishList.wishListItemsCount();
 });
 
 
-
-
-
-
-
-
-//  //Testing
-
-// Cart.removeAllCartItems();
-// Cart.addCartItem(new CartItem(1,3));
-// Cart.addCartItem(new CartItem(2,7));
-// Cart.addCartItem(new CartItem(1,3));
-
-
-// // WishList.removeAllWishListItems();
-// WishList.addWishListItem(2);
-// WishList.addWishListItem(3);
-// WishList.removeWishListItem(2);
-
-
-//

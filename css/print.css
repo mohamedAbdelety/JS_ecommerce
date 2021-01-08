@@ -1,0 +1,181 @@
+.noprint {
+    display: none;
+ }
+
+
+ *{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+   overflow-x: hidden;
+}
+
+
+
+
+
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+button {
+    color: #fff;
+    outline: medium;
+}
+
+a, .button {
+    -webkit-transition: all .3s ease-out 0s;
+    -moz-transition: all .3s ease-out 0s;
+    -ms-transition: all .3s ease-out 0s;
+    -o-transition: all .3s ease-out 0s;
+    transition: all .3s ease-out 0s;
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #00b1ff;
+    z-index: 1;
+    border-radius: 5px;
+    transition: transform .5s;
+    transition-timing-function: ease;
+    transform-origin: 0 0;
+    transition-timing-function: cubic-bezier(.5,1.6,.4,.7);
+    transform: scaleX(0);
+}
+
+
+
+
+
+
+
+
+
+.container{
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+}
+.overlay2{
+    background-color: rgba(0,0,0,0.4);
+    width: 100%;
+    height: 182px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/*
+///////////////////////////////
+//       Card Page           //
+///////////////////////////////
+*/
+
+.banner2{
+    background-image: url('../image/pexels-karolina-grabowska-5632402.jpg');
+    min-height: 350px;
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: cover;
+}
+
+.overlay-card-panner{
+    background-color: rgba(0,0,0,0.4);
+    height: 350px;
+    color: #fff;
+}
+
+.card-list{
+    margin-top: 80px;
+    margin-bottom: 50px;
+}
+
+.card-table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+.card-table td, .card-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+.card-table tr:nth-child(even){background-color: #f2f2f2;}
+.card-table tr:hover {background-color: #ddd;}
+.card-table th {
+padding-top: 12px;
+padding-bottom: 12px;
+background-color: #999;
+color: white;
+}
+
+
+.mybtn{
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 400;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.mybtn:hover{
+    opacity: 0.8;
+}
+.btn-delete{
+    background-color: #d9534f;
+    padding: 6px 20px;
+}
+.btn-printing{
+    background-color: #f0ad4e;
+    padding: 6px 20px;
+}
+.btn-update{
+    background-color: #5bc0de;
+    padding: 6px 20px;
+}
+.upd{
+    margin-top: 10px;
+}
+
+.btn-green{
+    background-color: #5cb85c;
+    padding: 4px 20px;
+}
+
+.btn-red{
+    background-color: #d9534f;
+    padding: 4px 20px;
+}
+
+.quant-field{
+    height: 22px;
+    text-align: center;
+}
+

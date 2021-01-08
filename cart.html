@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> M3B | Cart </title>
+        <meta name="description" content="">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body>
+
+        <section class="navbar">
+            <ul>
+                <li><i class="fa fa-facebook"></i></li>
+                <li><i class="fa fa-twitter"></i></li>
+                <li><i class="fa fa-instagram"></i></li>
+                <li><i class="fa fa-linkedin"></i></li>
+            </ul>
+            <div class="contact">
+                <span>
+                    <i class=" fa fa-phone"></i>
+                        +(02) 12852788
+                </span>
+                <span>
+                    <i class=" fa fa-envelope"></i>
+                    shop@gmail.com
+                </span>
+            </div>
+        </section>
+        <div class="second-nav">
+            <a class="logo" href="index.html">
+                <img src="image/logo.png">
+            </a>
+            <ul>
+                <li class="home-link active"><a href="index.html#home">Home</a></li>
+                <li><a class="about-link" href="index.html#about">About Us</a></li>
+                <li><a class="product-link" href="category.html">Some Products</a class="about-link"></li>
+                <li><a class="leaderShip-link" href="index.html#LeaderShip">LeaderShip</a class="about-link"></li>
+                <li><a class="contact-link" href="index.html#contact">Contact</a class="about-link"></li>
+            </ul>
+            <div>
+                <a href="wish.html">
+                    <i class="fa fa-heart-o"></i>
+                    <span id="wishCountSpan" class="label" style="right: 200px;">0</span>
+                </a>
+                <a href="cart.html">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span id="cartCountSpan" class="label" style="right: 120px;">0</span>
+                </a>
+            </div>
+        </div>
+        <section class="banner2">
+            <div class="overlay-cart-panner">
+            </div>
+        </section>  
+       
+
+        <section class="cart-list">
+            <div class="container">
+                <table id="cartTable" class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Description</th>
+                            <th>image</th>
+                            <th>Quantity</th>
+                            <th>Available</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                            <th>Control</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cartTableBody">
+
+                    </tbody>
+                </table>
+                <button id="saveCart" class="upd mybtn btn-update">
+                    <i class="fa fa-edit"></i><span> Save Change</span>
+                </button>
+                <button id="emptycart" class="mybtn btn-delete">
+                    <i class="fa fa-trash"></i><span> Delete Cart items</span>
+                </button>
+                <button id="printcart" class="mybtn btn-printing">
+                    <i class="fa fa-print"></i><span> print Cart</span>
+                </button>
+            </div>
+        </section>
+       
+        <section class="footer">
+            <div class="container">
+                <div>
+                    <h3><span>C</span>ategories</h3>
+                    <ul>
+                        <li>
+                            <a href="#">Electronic</a>
+                        </li>
+                        <li>
+                            <a href="#">Fashion</a>
+                        </li>
+                        <li>
+                            <a href="#">Computing</a>
+                        </li>
+                        <li>
+                            <a href="#">Sporting</a>
+                        </li>
+                       
+                    </ul>
+                </div>
+                <div>
+                    <h3><span>S</span>ervice</h3>
+                    <ul>
+                        
+                        <li>
+                            <a href="wish.html">
+                            Wishes List
+                            </a>
+                        </li>
+                        <li>
+                            <a href="cart.html">
+                                Shopping Cart
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Transfer
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3>
+                        <span>G</span>ET IN TOUCH
+                    </h3>
+                    <p class="get-text">
+                        Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+                    </p>
+
+                    <div class="icons-group">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="shop-img">
+                        <div class="mask">
+                            
+                            <img src="image/ecommerce-2140603_1920.jpg">
+                            <div class="overlay2"></div>
+                        </div>
+                </div class="mask">
+            </div>                
+            
+            
+            <div class="footerending">
+                <div>
+                   
+                    <a href="#">
+                        <img src="image/icons/payment-method.png" style="color: #fff;" alt="ICON-PAY">
+                    </a>
+                </div>
+                <p class="Copyright">
+                    Copyright <span>ITI_INTAKE</span> 41 M3B ©<script>document.write(new Date().getFullYear());</script> All rights reserved
+                </p>
+            </div>
+        
+        </section>
+
+        <script src="js/jquery-3.1.1.min.js"></script>
+        <script src="js/design.js"></script>
+        <script src="js/cookies.js"></script>
+        <script src="js/index.js"></script>
+        <script src="js/CartInteraction.js"></script>
+    </body>
+
+</html>

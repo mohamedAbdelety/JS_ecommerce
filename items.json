@@ -4,47 +4,91 @@
 		"id":1,
 		"name":"iphone 12",
 		"category":"electronic",
-		"image":"iphone.jpg",
-		"price":9800,
+		"image":"iphone.png",
+		"price":980,
 		"quantity":5,
-		"Descrption":"simple descrption about iphone 12"
+		"description":"simple descrption about iphone 12"
 	},
 	{
 		"id":2,
 		"name":"coat",
 		"category":"fashion",
 		"image":"coat.jpg",
-		"price":400,
+		"price":40,
 		"quantity":34,
-		"Descrption":"handmade coat made from cotton"
+		"description":"handmade coat made from cotton"
 	},
 	{
 		"id":3,
 		"name":"NoteBook 7",
 		"category":"computing",
 		"image":"notebook.jpg",
-		"price":12000,
+		"price":1200,
 		"quantity":3,
-		"Descrption":"simple descrption about notebook"
+		"description":"simple descrption about notebook"
 	},
 	{
 		"id":4,
 		"name":"Dell G3",
 		"category":"computing",
 		"image":"dell.jpg",
-		"price":14000,
+		"price":1400,
 		"quantity":6,
-		"Descrption":"simple descrption about dell"
+		"description":"simple descrption about dell"
 	},
 	{
 		"id":5,
-		"name":"treadmills",
+		"name":"treadmill",
 		"category":"sporting",
 		"image":"tread.jpg",
-		"price":5400,
+		"price":540,
 		"quantity":1,
-		"Descrption":"simple descrption about treadmills With a max user weight of 100kg and a speed range of 1-10 km/hr"
+		"description":"simple descrption "
+	},
+	{
+		"id":6,
+		"name":"iphone 12",
+		"category":"electronic",
+		"image":"iphone.png",
+		"price":900,
+		"quantity":5,
+		"description":"simple descrption about iphone 12"
+	},
+	{
+		"id":7,
+		"name":"coat",
+		"category":"fashion",
+		"image":"coat.jpg",
+		"price":40,
+		"quantity":34,
+		"description":"handmade coat made from cotton"
+	},
+	{
+		"id":8,
+		"name":"NoteBook 7",
+		"category":"computing",
+		"image":"notebook.jpg",
+		"price":1200,
+		"quantity":3,
+		"description":"simple descrption about notebook"
+	},
+	{
+		"id":9,
+		"name":"Dell G3",
+		"category":"computing",
+		"image":"dell.jpg",
+		"price":1400,
+		"quantity":6,
+		"description":"simple descrption about dell"
+	},
+	{
+		"id":10,
+		"name":"treadmill",
+		"category":"sporting",
+		"image":"tread.jpg",
+		"price":540,
+		"quantity":1,
+		"description":"simple descrption "
 	}
-
 
 ]

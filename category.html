@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M3B | category</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/category.css">
+
+</head>
+
+<body>
+
+
+    <div class="second-nav">
+        <a class="logo" href="index.html">
+            <img src="image/logo.png">
+        </a>
+        <ul>
+            <li class="home-link active"><a href="index.html#home">Home</a></li>
+            <li><a class="about-link" href="index.html#about">About Us</a></li>
+            <li><a class="product-link" href="category.html">Some Products</a class="about-link"></li>
+            <li><a class="leaderShip-link" href="index.html#LeaderShip">LeaderShip</a class="about-link"></li>
+            <li><a class="contact-link" href="index.html#contact">Contact</a class="about-link"></li>
+        </ul>
+        <div>
+            <a href="wish.html">
+                <i class="fa fa-heart-o"></i>
+                <span id="wishCountSpan" class="label" style="right: 200px;">0</span>
+            </a>
+            <a href="cart.html">
+                <i class="fa fa-shopping-cart"></i>
+                <span id="cartCountSpan" class="label" style="right: 120px;">0</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="filter">
+
+        <!-- name filter -->
+
+        <div id="nameFilter">
+            <label>Name</label>
+            <input class="myinputtext" id="productNameFilterTxt" placeholder="Search by product name">
+        </div>
+        <hr>
+
+        <!-- price filter -->
+        <div id="priceFilter">
+            <label>Price</label>
+
+            <div id="priceFilterMin">
+                <label for="priceFilterMinVal">From</label>
+                <label class="filterCurrencySymbol">$</label>
+                <input class="myinputtext" type="number" min="0" id="priceFilterMinVal">
+            </div>
+
+            <div id="priceFilterMax">
+                <label for="priceFilterMaxVal">To</label>
+                <label class="filterCurrencySymbol">$</label>
+                <input class="myinputtext" type="number" min="0" id="priceFilterMaxVal">
+            </div>
+
+            <div id="priceFilterSlider"></div>
+        </div>
+        <hr>
+
+        <!-- category filter -->
+        <div id="categoryFilter">
+            <label>Category</label>
+        </div>
+
+        <button class="mybtn btn-search" id="applyFilterBtn">
+            <i class="fa fa-search"></i> Apply
+        </button>
+
+
+        <button class="mybtn btn-search" id="resetFilterBtn">
+            <!-- <i class="fa fa-reset"></i>  -->Reset
+        </button>
+
+        <!-- <input type="button" id="resetFilterBtn" value="Reset" /> -->
+
+    </div>
+
+
+    <div id="content">
+        <div id="viewedProductsPreference">
+            <label for="currenciesSelect">Currency :</label>
+            <select id="currenciesSelect">
+            </select>
+        </div>
+
+        <div id="cardContainer"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="js/changeCurrency.js"></script>
+    <script src="js/cookies.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/filterPage.js"></script>
+</body>
+
+</html>
