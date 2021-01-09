@@ -18,8 +18,7 @@ function createCard(product) {
             <div class='_container'>
                 <hr> 
                 <p class='description'>` + product.description + `</p>
-                <span>` + product.price + `</span>
-                <button onclick='changeCurrency(this,`+product.price+`)' class='currencyBtn'>Change currency</button>
+                <span>$` + product.price + ` </span>
                 <br>
                 <br>
                 <i onclick='heartHandler(this,` + product.id + `)' class='` + redClass + ` wishlist fa fa-heart'></i>
@@ -36,7 +35,7 @@ function heartHandler(icon, itemId) {
     } else {
         WishList.removeWishListItem(itemId); 
         //removing card in case of unlike
-        $(icon).parent().parent().fadeOut(1000);        
+        $(icon).parent().parent().fadeOut(300);        
     }
     document.getElementById("wishCountSpan").innerText = WishList.wishListItemsCount();
    

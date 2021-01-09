@@ -16,15 +16,15 @@ function createCard(product) {
     
     
     return document.createElement("div").innerHTML =
-        `<div class='card' onclick='itemPage("` + product.image + `")'>
+        `<div class='card' onclick='itemPage("${product.image}","${product.name}","${product.description}")'>
             <img src=/image/items/` + product.image + `>
             <div class='productName'>` + product.name + `</div>
             <div class='_container'>
                 <hr> 
                 <p class='description'>` + product.description + `</p>
                 <span>` + PreferredCurrency.symbol+ ` ` + (product.price * (+PreferredCurrency.factor)).toFixed(2) + `</span>
-                <i onclick='heartHandler(this,` + product.id + `)' class='` + redClass + ` wishlist fa fa-heart'></i>
-                <i onclick='cartHandler(this,` +  product.id + `)' class='` + blueClass + ` cart fa fa-shopping-cart'></i>
+                <i onclick='heartHandler(event, this,` + product.id + `)' class='` + redClass + ` wishlist fa fa-heart'></i>
+                <i onclick='cartHandler(event,this,` +  product.id + `)' class='` + blueClass + ` cart fa fa-shopping-cart'></i>
                 <br>
             </div> 
         </div>`;
@@ -32,25 +32,30 @@ function createCard(product) {
 
 }
 
-/*
-function itemPage(source){
-   let popup = open("", "", "");
+//this functin create item window on the fly 
+function itemPage(image,name, desc){
+   var popup = open("", "", "width=700,height=500");
    
+    console.log(image,name,desc);
+        popup.document.write(`<!DOCTYPE html>
+        <html>
+            <head>
+                <title>Product : ` + name.toUpperCase() + `</title>
+            </head>
+            <body style="text-align:center ;background-image: url('./image/backgroundtexture.jpg')">
+                <img id ="myImg" style="height:300px; margin:auto" src="./image/items/` +image + ` " id="productIMG">
+                <h1 id="name" style="color:#641E16; font-weight:bold ;font-family:courier" >` + name.toUpperCase() + `</h1>
+                <hr style="width:70%">
+                <div id="desc" style="color:#641E16 ;font-family:arial" > ` + desc.toUpperCase() + `</div>
+            </body>
+        </html>`);
     
-    //var productImg = popup.document.createElement("img");
-    //productImg.setAttribute("src",`/image/items/` + source + ` `);
-    
-    popup.onload = function(){
-        
-        
-        //popup.document.body.innerHTML=`<img src="/image/items/` + source +` ">`; 
-    } 
-    
-}*/
+}
 
 
-function heartHandler(icon, itemId) {
+function heartHandler(event,icon, itemId) {
     icon.classList.toggle("red");
+    event.stopPropagation();
     if (icon.classList[3] == "red") {
         WishList.addWishListItem(itemId);
     } else {
@@ -59,7 +64,8 @@ function heartHandler(icon, itemId) {
     document.getElementById("wishCountSpan").innerText = WishList.wishListItemsCount();
 }
 
-function cartHandler(icon, itemId) {
+function cartHandler(event,icon, itemId) {
+    event.stopPropagation();
     
     if (!((icon.classList["value"]).split(" ")).includes ("blue")){
         icon.classList.add("blue");
