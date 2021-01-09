@@ -36,7 +36,6 @@ function createCard(product) {
 function itemPage(image,name, desc){
    var popup = open("", "", "width=700,height=500");
    
-    console.log(image,name,desc);
         popup.document.write(`<!DOCTYPE html>
         <html>
             <head>
@@ -154,10 +153,10 @@ function applyFilter() {
     viewedProducts.allProducts();
 
     viewedProducts.filterDataByName(document.querySelector("#productNameFilterTxt").value);
-
+    
     viewedProducts.filterDataByPrice(
-        parseInt(document.querySelector("#priceFilterMinVal").value / PreferredCurrency.factor),
-        parseInt(document.querySelector("#priceFilterMaxVal").value / PreferredCurrency.factor)
+        parseInt(Math.floor(document.querySelector("#priceFilterMinVal").value / PreferredCurrency.factor)),
+        parseInt(Math.ceil(document.querySelector("#priceFilterMaxVal").value / PreferredCurrency.factor))
     );
 
     refreshCategoryFilter();
@@ -195,7 +194,7 @@ var PreferredCurrency = {
 };
 const key = "a372b2517afcf282ec51";
 
-function changePricesCurrency(toType = "EGP", currencySymbol) {
+function changePricesCurrency(toType = "USD", currencySymbol) {
 
     var url = "https://free.currconv.com/api/v7/convert?q=USD_" + toType + "&compact=ultra&apiKey=" + key;
     const xhr = new XMLHttpRequest();
@@ -247,6 +246,7 @@ function generateCurrenciesList() {
 
 //------------------ Add Events Listeners --------------------
 
+// to ensure that data are already loaded from json file
 addEventListener("onLoadProductsData", function () {
     viewedProducts.allProducts();
     setPriceFilter();
@@ -256,10 +256,6 @@ addEventListener("onLoadProductsData", function () {
     }
     $C.deleteCookie("selectedCat");
     displayProducts();
-    //viewedProducts.allProducts();
-    
-    
-    
 });
 
 
@@ -292,9 +288,11 @@ document.querySelector("#currenciesSelect").onchange = function () {
     if($C.hasCookie("preferredCurrency"))
         PreferredCurrency = JSON.parse($C.getCookie("preferredCurrency"));
 
-    generateCurrenciesList();
-
     //to refresh currency factor
-    changePricesCurrency(PreferredCurrency.id, PreferredCurrency.symbol);
+    if(PreferredCurrency.id != "USD")
+        changePricesCurrency(PreferredCurrency.id, PreferredCurrency.symbol);
+    
+    generateCurrenciesList();
+    
 }();
 
