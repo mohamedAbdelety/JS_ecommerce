@@ -13,8 +13,10 @@ function createCard(product) {
             redClass = "red";
         }
     }
+    
+    
     return document.createElement("div").innerHTML =
-        `<div class='card'>
+        `<div class='card' onclick='itemPage("` + product.image + `")'>
             <img src=/image/items/` + product.image + `>
             <div class='productName'>` + product.name + `</div>
             <div class='_container'>
@@ -29,6 +31,23 @@ function createCard(product) {
 
 
 }
+
+/*
+function itemPage(source){
+   let popup = open("", "", "");
+   
+    
+    //var productImg = popup.document.createElement("img");
+    //productImg.setAttribute("src",`/image/items/` + source + ` `);
+    
+    popup.onload = function(){
+        
+        
+        //popup.document.body.innerHTML=`<img src="/image/items/` + source +` ">`; 
+    } 
+    
+}*/
+
 
 function heartHandler(icon, itemId) {
     icon.classList.toggle("red");

@@ -29,13 +29,14 @@ function createCard(product) {
         </div>`;
 }
 function heartHandler(icon, itemId) {
+
     icon.classList.toggle("red");
     if (icon.classList[3] == "red") {
         WishList.addWishListItem(itemId);
     } else {
-        WishList.removeWishListItem(itemId);
-        document.getElementById("cardContainer").innerHTML = "";
-        displayWishlistCards();
+        WishList.removeWishListItem(itemId); 
+        //removing card in case of unlike
+        $(icon).parent().parent().fadeOut(1000);        
     }
     document.getElementById("wishCountSpan").innerText = WishList.wishListItemsCount();
    
@@ -62,4 +63,5 @@ function displayWishlistCards(){
 addEventListener("onLoadProductsData", function () {
     displayWishlistCards();
 });
+
 
